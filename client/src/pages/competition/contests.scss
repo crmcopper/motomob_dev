@@ -1,0 +1,1104 @@
+.contest-grid {
+  .contests-page-container {
+    padding-top: 87px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @media (max-width: 991px) {
+      padding-top: 75px;
+    }
+    .contests-navigation {
+      position: absolute;
+      top: 87px;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      @media (max-width: 991px) {
+        top: 75px;
+      }
+    }
+    .slick-slider,
+    .slick-list,
+    .slick-track,
+    .slick-slide {
+      height: 100% !important;
+      border: none;
+      min-height: 460px;
+    }
+    .slick-slide > div {
+      height: 100%;
+      a {
+        height: 100%;
+      }
+    }
+    .slick-dots {
+      left: 30px;
+      top: 50%;
+      width: auto;
+      transform: translate(0, -50%);
+      bottom: auto;
+      @media (max-width: 991px) {
+        left: 0px;
+      }
+      li {
+        display: block;
+        button {
+          &::before {
+            opacity: 1;
+            transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -webkit-transition: all 0.3s ease-in-out;
+            color: $white;
+            font-size: 10px;
+          }
+        }
+        &.slick-active {
+          button {
+            &::before {
+              font-size: 15px;
+              color: $red;
+            }
+          }
+        }
+      }
+    }
+  }
+  .contests-navigation {
+    .ui.secondary.pointing.menu {
+      margin-top: 17px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      .item {
+        min-width: 130px;
+        text-align: center;
+        display: block;
+        font-family: "futuramedium", sans-serif;
+        font-size: 1.286rem;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: $white;
+        position: relative;
+        border-bottom: none;
+        outline: none;
+        @media screen and (max-width: 479px) {
+          min-width: max-content;
+          font-size: 1rem;
+        }
+        &.active {
+          color: $white;
+          &::after {
+            content: "";
+            position: absolute;
+            height: 3px;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            background-color: $white;
+            border-radius: 5px;
+            display: block;
+            transform: none;
+            width: 100%;
+            top: auto;
+          }
+        }
+      }
+    }
+    .ui.menu:not(.vertical) > .menu {
+      margin: 0 auto;
+    }
+  }
+  .contest-item {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+  }
+  .actions-share {
+    outline: none;
+    background: none;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 15px;
+    top: 6rem;
+  }
+  .container-layer-overlay {
+    background-color: #000000;
+    opacity: 0.48;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .content-centered-block {
+    max-width: 1127px;
+    margin: 0 auto;
+    height: 100%;
+    @media (max-width: 1199px) {
+      padding: 0px 80px;
+    }
+    @media (max-width: 991px) {
+      padding: 0px 35px;
+    }
+    .content-block {
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      align-items: center;
+      height: 100%;
+      .text-center {
+        width: 100%;
+      }
+      .contest-title {
+        font-family: "futuramedium", sans-serif;
+        font-size: 2.5rem;
+        line-height: normal;
+        color: #ffffff;
+        text-align: center;
+        @media screen and (max-width: 767px) {
+          font-size: 1.714rem;
+          line-height: normal;
+        }
+      }
+      .contest-subtitle {
+        margin-top: 15px;
+        font-size: 1.643rem;
+        color: #ffffff;
+        font-family: "futurabook";
+        @media screen and (max-width: 767px) {
+          font-size: 1rem;
+          line-height: normal;
+          margin-top: 0.5rem;
+        }
+      }
+      .participate-button {
+        height: 48px;
+        width: 175px;
+        font-size: 1rem;
+        font-family: "futuramedium", sans-serif;
+        font-weight: 400;
+        margin-top: 2rem;
+        &:disabled,
+        [disabled] {
+          cursor: not-allowed;
+        }
+        &:hover:not([disabled]) {
+          background-color: rgba(252, 79, 30, 1);
+          opacity: 1;
+        }
+        @media screen and (max-width: 767px) {
+          margin-top: 3rem;
+        }
+      }
+      .contest-entries {
+        color: $white;
+        font-size: 0.95rem;
+        flex-basis: 100%;
+        margin-top: 0.5rem;
+        font-family: "futurabook";
+        width: 0;
+        white-space: nowrap;
+      }
+    }
+    .contest-sponsors {
+      color: #ffffff;
+      position: relative;
+      font-family: "futurabook";
+      font-size: 1.286rem;
+      bottom: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @media screen and (max-width: 767px) {
+        display: inherit;
+        text-align: center;
+        font-size: 1rem;
+        bottom: 150px;
+      }
+      .sponsors-logos {
+        display: flex;
+        .sponsor-logo-container {
+          max-width: 100px;
+          margin: 0 1.1rem;
+          text-align: center;
+          @media screen and (max-width: 767px) {
+            max-width: 80px;
+          }
+          img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+          }
+        }
+        @media screen and (max-width: 767px) {
+          margin-top: 0.5rem;
+          justify-content: center;
+        }
+      }
+    }
+  }
+  .gallery-page-container {
+    .gallery-header-container {
+      height: 359px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      margin-top: -26px;
+      .back-button {
+        z-index: 2;
+        position: absolute;
+        top: 15px;
+        left: 0;
+        right: 0;
+        max-width: 1127px;
+        margin: 0 auto;
+      }
+      .content-centered-block {
+        .content-block {
+          .text-center {
+            padding-bottom: 2rem;
+            @media screen and (max-width: 767px) {
+              padding-bottom: 6rem;
+            }
+          }
+        }
+        .contest-sponsors {
+          bottom: 80px;
+          @media screen and (max-width: 767px) {
+            bottom: 100px;
+          }
+        }
+      }
+      .actions-share {
+        top: 15px;
+        @media screen and (max-width: 767px) {
+          top: 10px;
+          right: 10px;
+          width: 38px;
+          height: 38px;
+        }
+      }
+    }
+    .photo-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-bottom: 2rem;
+      @media screen and (max-width: 1199px) {
+        padding: 0 1rem 2rem;
+      }
+    }
+  }
+  .gallery-navigation {
+    margin-bottom: 2.5rem;
+    .ui.secondary.menu {
+      .ui.dropdown {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        position: relative;
+        left: 33px;
+
+        @media screen and (max-width: 480px) {
+          left: 5px;
+        }
+        .text {
+          color: $light-grey;
+          font-size: 14px;
+        }
+        i.icon {
+          margin-bottom: 4px;
+          color: grey;
+        }
+        .menu:after {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 10px;
+          bottom: 100%;
+          width: 0;
+          height: 0;
+          border-bottom: 10px solid #ffffff;
+          border-top: 10px solid transparent;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+        }
+      }
+      .menu {
+        margin: 0 auto;
+        @media screen and (max-width: 479px) {
+          display: table-row;
+        }
+      }
+    }
+    .ui.secondary.pointing.menu {
+      margin-top: 17px;
+      border-bottom: 1px solid $light-grey;
+      @media screen and (max-width: 479px) {
+        display: table;
+        width: 100%;
+      }
+      .item {
+        text-align: center;
+        display: block;
+        font-family: "futuramedium", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 0;
+        font-weight: 400;
+        color: $light-grey;
+        position: relative;
+        border-bottom: none;
+        outline: none;
+        @media screen and (min-width: 600px) {
+          min-width: 130px;
+        }
+        @media screen and (max-width: 600px) {
+          width: max-content;
+        }
+
+        @media screen and (max-width: 479px) {
+          display: table-cell;
+          padding-left: 2px;
+          padding-right: 2px;
+        }
+        &.active {
+          color: $red;
+          &::after {
+            content: "";
+            position: absolute;
+            height: 3px;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            background-color: $red;
+            border-radius: 5px;
+            display: block;
+            transform: none;
+            width: 100%;
+            border: none;
+            top: auto;
+          }
+        }
+        .svg-icon {
+          margin-right: 0;
+        }
+      }
+      .filter-menu {
+        .item {
+          width: 100px;
+          text-align: left;
+        }
+      }
+    }
+  }
+  .filter-block {
+    padding: 0 2rem;
+    @media screen and (max-width: 1199px) {
+      padding: 0 15px;
+    }
+    h3 {
+      font-size: 1.714rem;
+      font-family: "futuramedium", sans-serif;
+      font-weight: 400;
+      color: #3a3a3a;
+      margin-bottom: 0;
+    }
+    .ui {
+      &.button {
+        &.red {
+          height: 40px;
+          width: 126px;
+          box-shadow: none !important;
+          @media screen and (max-width: 767px) {
+            width: 110px;
+          }
+          @media screen and (max-width: 380px) {
+            width: 100px;
+          }
+          margin-top: 0;
+          padding: 0;
+          vertical-align: top;
+          img {
+            margin-right: 5px;
+          }
+        }
+      }
+      &.buttons {
+        margin-left: 20px;
+        .ui {
+          &.button {
+            width: 160px;
+            border-color: $red;
+            &:first-child {
+              border-top-left-radius: 5px;
+              border-left: 1px solid $red;
+              border-bottom-left-radius: 5px;
+            }
+            @media screen and (max-width: 767px) {
+              width: 90px;
+            }
+            @media screen and (max-width: 380px) {
+              width: 80px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .gallery-container {
+    padding: 2rem;
+    @media screen and (max-width: 1199px) {
+      padding: 1rem 15px;
+    }
+    .gallery-row {
+      margin-left: -15px;
+      margin-right: -15px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .gallery-item-container {
+      width: 25%;
+      padding: 0 15px;
+      margin: 15px 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      &.entries-photos {
+        width: 33.33333%;
+        .bordered-bx {
+          height: 100%;
+          border-radius: 10px;
+        }
+        @media screen and (max-width: 767px) {
+          width: 50%;
+        }
+        @media screen and (max-width: 480px) {
+          width: 100%;
+        }
+      }
+      @media screen and (max-width: 1199px) {
+        width: 33.33333%;
+      }
+      @media screen and (max-width: 767px) {
+        width: 50%;
+      }
+      @media screen and (max-width: 480px) {
+        width: 100%;
+      }
+      &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+      .content-block {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        bottom: 0;
+        right: 15px;
+        .gallery-item-photo-container {
+          height: 90%;
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          border-radius: 10px;
+          text-align: center;
+          cursor: pointer;
+          &.no-border-radius {
+            overflow: inherit;
+            border-radius: 0;
+          }
+          > img {
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0px;
+            margin: auto;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+        .gallery-actions {
+          padding: 10px 0 0 0px;
+          align-items: center;
+          .ui {
+            &.header {
+              font-size: 1rem;
+              color: #6d7278;
+              font-family: "futuramedium", sans-serif;
+              font-weight: 400;
+              margin-bottom: 0;
+              .image {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border-color: $red;
+                padding: 2px;
+                margin-right: 0.5rem;
+              }
+            }
+          }
+          .svg-icon {
+            & + .svg-icon {
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+      .delete-photo-button {
+        position: absolute;
+        z-index: 1;
+        top: 5px;
+        right: 20px;
+        width: 38px;
+        height: 38px;
+        cursor: pointer;
+        background-color: $red;
+        border-radius: 50%;
+        line-height: 46px;
+        text-align: center;
+      }
+    }
+    &.single-photo {
+      padding: 0 2rem;
+      @media screen and (max-width: 1199px) {
+        padding: 0 15px;
+      }
+      .gallery-item-container {
+        width: 100%;
+      }
+    }
+    &.double-photo {
+      padding: 0 2rem 2rem;
+      @media screen and (max-width: 1199px) {
+        padding: 0 15px 1rem;
+      }
+      .gallery-item-container {
+        width: 50%;
+        @media screen and (max-width: 480px) {
+          width: 100%;
+        }
+      }
+    }
+    &.single-photo,
+    &.double-photo {
+      .content-block {
+        .gallery-item-photo-container {
+          @media screen and (min-width: 767px) {
+            height: 95%;
+          }
+          @media screen and (min-width: 1199px) {
+            height: 98%;
+          }
+          .madal {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            z-index: 5;
+          }
+        }
+      }
+    }
+  }
+  .entries-container {
+    h2 {
+      font-size: 2.143rem;
+      font-family: "futuramedium", sans-serif;
+      font-weight: 400;
+      margin-bottom: 0rem;
+      color: #3a3a3a;
+      margin-top: 0;
+      &.border-top-1 {
+        border-top: 1px solid #e8eaee;
+        padding-top: 3.5rem;
+      }
+    }
+    main {
+      padding-top: 0;
+    }
+  }
+  .btn-red {
+    background-color: $red;
+    color: $white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+}
+.ril__outer {
+  background-color: #000000 !important;
+  .ril__caption {
+    width: 100%;
+    background-color: #000000;
+    .ril__captionContent {
+      width: 100%;
+    }
+  }
+  .ril__toolbar {
+    background-color: #000;
+  }
+}
+
+.ril__toolbarItem {
+  .ril__closeButton {
+    background: url("/assets/images/icons/gray/close.svg") no-repeat center;
+    &:hover {
+      background: url("/assets/images/icons/close-red.svg") no-repeat center;
+    }
+  }
+}
+
+.ril__outerAnimating {
+  .ril__navButtonNext {
+    background: url("/assets/images/icons/gray/next-btn-gal.svg") no-repeat center;
+    &:hover {
+      background: url("/assets/images/icons/next-btn-gal.svg") no-repeat center;
+    }
+  }
+  .ril__navButtonPrev {
+    left: 0;
+    background: url("/assets/images/icons/gray/prev-btn-gal.svg") no-repeat center;
+    &:hover {
+      background: url("/assets/images/icons/prev-btn-gal.svg") no-repeat center;
+    }
+  }
+}
+.user-actions-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  align-items: center;
+  .header {
+    color: $white;
+    .ui.rounded.image {
+      border-radius: 50%;
+      border-color: $red;
+      padding: 2px;
+      width: 36px;
+      height: 36px;
+      margin-right: 0.5rem;
+    }
+    span {
+      font-size: 1rem;
+      font-weight: 400;
+      font-family: "futuramedium", sans-serif;
+    }
+  }
+}
+.ui {
+  &.fluid {
+    &.card {
+      &.photo-contest {
+        border-radius: 5px;
+        box-shadow: none;
+        border: 1px solid #eff5f8;
+        padding: 15px;
+        margin: 0 auto !important;
+        max-width: 640px;
+        > .header {
+          margin-bottom: 0rem;
+          padding-right: 80px;
+          position: relative;
+          .rounded {
+            width: 40px;
+            height: 40px;
+            vertical-align: top;
+            border-radius: 50%;
+            border-color: $red;
+            padding: 2px;
+          }
+          .content {
+            font-size: 1.143rem;
+            position: relative;
+            font-family: "futurabook", sans-serif;
+            color: #333333;
+            font-weight: 400;
+            .sub {
+              font-family: "futurabook";
+              font-size: 1rem;
+              margin-top: 3px;
+              color: $light-grey;
+            }
+          }
+          .cancel-btn {
+            position: absolute;
+            right: 0;
+          }
+        }
+        .form-container {
+          padding: 0;
+          .pointer {
+            flex-wrap: wrap;
+            .image {
+              margin: 0 auto;
+            }
+            .upload-img {
+              .image {
+                max-height: 140px;
+              }
+            }
+          }
+          .text-block {
+            margin-top: 1.2rem;
+            .add-bike-rounded-button {
+              margin-top: 1.2rem;
+            }
+          }
+          .input-area {
+            margin-top: 1rem;
+          }
+          .title {
+            font-size: 16px;
+            font-weight: 400;
+            font-family: "futuramedium", sans-serif;
+          }
+          .text-paragraph {
+            font-size: 14px;
+            font-family: "futurabook";
+            color: #424242;
+          }
+          .link {
+            color: #e83f3f;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: underline;
+          }
+          .search-bar {
+            input {
+              font-family: "futurabook";
+              font-size: 1.2rem;
+              padding: 0.578rem 1em 0.578rem 35px;
+            }
+          }
+        }
+        .contests-preview {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.search-bike-popup {
+  &.photo-contests {
+    .option-area {
+      max-height: 240px;
+    }
+  }
+}
+.pb-90 {
+  padding-bottom: 90px;
+}
+
+.contests-list {
+  margin-top: 25px;
+}
+
+.ui.modal.participate-modal {
+  max-width: 640px;
+  height: 542px;
+  .header {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 17px;
+    .header-content-container {
+      display: flex;
+      align-items: center;
+      .user-picture {
+        max-width: 40px;
+        max-height: 40px;
+        img {
+          width: 40px;
+          height: 40px;
+        }
+        .ui.rounded.image {
+          border-radius: 50%;
+          border-color: var(--red);
+          padding: 2px;
+        }
+      }
+      .modal-header-title-block {
+        display: flex;
+        flex-direction: column;
+        margin-left: 25px;
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+          font-family: "futurabook";
+        }
+        .modal-subtitle {
+          font-size: 14px;
+          color: $light-grey;
+          font-family: "futurabook";
+        }
+      }
+    }
+    .close-button {
+      outline: none;
+      border: none;
+      background: unset;
+      position: relative;
+      left: 15px;
+      bottom: 15px;
+      svg {
+        fill: var(--text-light);
+      }
+    }
+  }
+  .participate-modal-content {
+    padding: 0px 80px 10px 100px;
+    box-sizing: border-box;
+    max-height: 504px;
+    overflow: auto;
+    .text-block {
+      margin-top: 30px;
+    }
+    .link {
+      color: $red;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      font-family: "futuramedium", sans-serif;
+    }
+    .light-text {
+      color: $light-grey;
+      font-size: 12px;
+      text-align: center;
+      padding: 0 83px;
+      font-family: "futurabook";
+      margin-top: 28px;
+
+      @media screen and (max-width: 430px) {
+        padding: 0 10px;
+      }
+    }
+    .text-paragraph {
+      font-size: 14px;
+      font-family: "futurabook";
+      color: $black;
+    }
+  }
+
+  .agree-participate-button {
+    width: 220px;
+    height: 56px;
+    background-color: $red;
+    outline: none;
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    margin: 8px auto 9px;
+    display: block;
+    font-size: 16px;
+    font-family: "futurabook";
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.7;
+    }
+  }
+}
+.ui.modal.warning-modal {
+  max-width: 640px;
+  .warning-modal-content {
+    text-align: center;
+    .close-button {
+      outline: none;
+      border: none;
+      background: unset;
+      position: relative;
+      left: 50%;
+      bottom: 10px;
+      svg {
+        fill: var(--text-light);
+      }
+    }
+    h1 {
+      font-family: "futuramedium", sans-serif;
+      font-weight: 400;
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
+    p {
+      font-family: "futurabook";
+      line-height: normal;
+      padding: 0 10%;
+      @media screen and (max-width: 767px) {
+        padding: 0;
+      }
+    }
+    .buttons-container {
+      margin: 1rem auto;
+
+      @media screen and (max-width: 358px) {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+.create-contest-container {
+  max-width: 800px;
+  margin: auto;
+  p {
+    font-weight: bolder;
+  }
+}
+
+.ui.modal.share-modal {
+  .content {
+    text-align: center;
+
+    .button-url {
+      max-width: 320px;
+      display: block;
+      background: none;
+      border: 1px solid $red;
+      color: $black;
+      margin: 20px auto;
+      font-family: "futurabook";
+      word-break: break-all;
+      border-radius: 4px;
+      padding: 11px;
+      cursor: pointer;
+    }
+    .button-copy {
+      background-color: $red;
+      padding: 21px 65px;
+      font-size: 1rem;
+      font-family: "futurabook";
+      margin: 10px auto;
+      font-weight: 400;
+      border: none;
+      color: #fff;
+      display: block;
+      border-radius: 4px;
+      cursor: pointer;
+
+      @media screen and (max-width: 340px) {
+        padding: 21px 20px;
+      }
+    }
+    .share-actions {
+      .react-share__ShareButton {
+        margin: 0 10px;
+      }
+    }
+  }
+  .close-button {
+    outline: none;
+    border: none;
+    background: unset;
+    position: absolute;
+    right: 0px;
+    top: 19px;
+  }
+  .ui.horizontal.divider {
+    margin: 24px 10px;
+    font-size: 13px;
+    color: $light-grey;
+    text-transform: lowercase;
+  }
+}
+.contest-grid,
+.ReactModalPortal {
+  .svg-icon {
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 1rem;
+    cursor: pointer;
+    .red-color {
+      display: none;
+    }
+    &:hover {
+      .gray-color {
+        display: none;
+      }
+      .red-color {
+        display: inline-block;
+      }
+    }
+  }
+  .gallery-item-actions {
+    .text-right {
+      .svg-icon {
+        margin-right: 0;
+      }
+    }
+    .text-light {
+      padding-top: 0.3rem;
+      display: inline-block;
+    }
+  }
+}
+.preview-container {
+  img {
+    max-width: 316px;
+    max-height: 127px;
+    object-fit: contain;
+  }
+}
+.contests-title {
+  padding-top: 2rem;
+  margin-bottom: 0;
+  font-size: 2.2rem;
+  font-family: "futuramedium", sans-serif;
+  font-weight: 400;
+}
+.contests-close-date {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  font-family: "futurabook", sans-serif;
+  font-weight: 400;
+}
+
+.post-like-share {
+  .svg-icon {
+    vertical-align: middle;
+    display: inline-block !important;
+    margin-right: 1rem;
+    cursor: pointer;
+    .red-color {
+      display: none !important;
+    }
+    &:hover {
+      .gray-color {
+        display: none !important;
+      }
+      .red-color {
+        display: inline-block !important;
+      }
+    }
+  }
+}
+.no-data {
+  background-color: rgba(0, 0, 0, 0.48);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 88px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  font-size: 2rem;
+}

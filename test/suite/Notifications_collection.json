@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "4cd845cf-3e1f-4d11-9767-0459c8b59cda",
+		"name": "Notifications_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signin with test user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0abdf69-221c-48b6-b7ce-28060592db1c",
+						"exec": [
+							"pm.test(\"user should login\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"verifyToken\",jsonData.data.signin.token)\r",
+							"    pm.environment.set(\"userId\",jsonData.data.signin.id)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation signin ($username: String!, $password: String!) {\r\n    signin (username: $username, password: $password) {\r\n        id\r\n        name\r\n        username\r\n        email\r\n        avatarUrl\r\n        token\r\n        usertag\r\n        admin\r\n        ownBikes {\r\n            bikeId\r\n            bikename\r\n            thumbUrl\r\n            prodStartYear\r\n        }\r\n        followBikes {\r\n            bikeId\r\n            bikename\r\n            thumbUrl\r\n            prodStartYear\r\n        }\r\n        location\r\n        createdAt\r\n        bikes\r\n        status\r\n    }\r\n}",
+						"variables": "{\r\n  \"username\": \"motobot\",\r\n  \"password\": \"test@123\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserNotifications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d373efdd-2d1c-483e-b3a9-b8a8d510cba6",
+						"exec": [
+							"pm.test(\"Should get list of user notification\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log('jsonData',jsonData)",
+							"    if(jsonData.data.getUserNotifications.notifications[0]){",
+							"        pm.environment.set(\"notificationId\", jsonData.data.getUserNotifications.notifications[0].id)",
+							"        pm.expect(jsonData.data.getUserNotifications.notifications).not.eq(undefined)",
+							"    }",
+							"        ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{verifyToken}}"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($username: String!) {\n    getUserNotifications(username: $username) {\n      notifications {\n        id\n        type\n        link\n        actionBy\n        sendTo\n        message\n        userId\n        avatarUrl\n        userbikes\n        username\n        hasActioned\n        createdAt\n      }\n      notificationsTotal\n    }\n  }",
+						"variables": "{\n  \"username\": \"motobot\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				},
+				"description": "getUserNotifications"
+			},
+			"response": []
+		},
+		{
+			"name": "readNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4986f936-e51d-410f-9cf7-8e7285eab394",
+						"exec": [
+							"pm.test('should return false if notification read', function() {",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.environment.get(\"notificationId\")){",
+							"        pm.expect(jsonData.data.readNotification).not.eq(undefined)",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation readNotification($notificationId: ID!) {\n    readNotification(notificationId: $notificationId) \n  }",
+						"variables": "{\n  \"notificationId\": \"{{notificationId}}\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readAllNotification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7301c96d-88ae-4853-8210-fd8270f9f8ba",
+						"exec": [
+							"pm.test('should return false if notification read', function() {",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.data.readAllNotification){",
+							"        pm.expect(jsonData.data.readAllNotification.notifications.findIndex(x=>x.hasActioned==false)).eq(-1)",
+							"    }",
+							"    ",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation readAllNotification($username: String!) {\n    readAllNotification(username: $username) {\n      notifications {\n        id\n        type\n        link\n        actionBy\n        sendTo\n        message\n        userId\n        avatarUrl\n        userbikes\n        username\n        hasActioned\n        createdAt\n      }\n      notificationsTotal\n    }\n  }",
+						"variables": "{\n  \"username\": \"{{username}}\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

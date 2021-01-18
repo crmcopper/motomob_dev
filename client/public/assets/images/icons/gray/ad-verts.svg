@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Adverts</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Profile" transform="translate(-205.000000, -340.000000)" fill="#BABECB" fill-rule="nonzero">
+            <g id="Left-Menu" transform="translate(190.000000, 112.000000)">
+                <path d="M17,234 C17,232.9 17.9,232 19,232 L27,232 L31,228 L33,228 L33,244 L31,244 L27,240 L19,240 C17.8954305,240 17,239.104569 17,238 L15,238 L15,234 L17,234 Z M25,243 L25,248 L22,248 L20.33,243 L19,243 L19,241 L27,241 L27,243 L25,243 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

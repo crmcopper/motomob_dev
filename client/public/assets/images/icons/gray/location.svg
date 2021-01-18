@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11" height="16" viewBox="0 0 11 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Location</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Profile" transform="translate(-649.000000, -149.000000)" fill="#BABECB" fill-rule="nonzero">
+            <path d="M654.5,149 C651.459286,149 649,151.504 649,154.6 C649,158.8 654.5,165 654.5,165 C654.5,165 660,158.8 660,154.6 C660,151.504 657.540714,149 654.5,149 Z M654.5,156.6 C653.415714,156.6 652.535714,155.704 652.535714,154.6 C652.535714,153.496 653.415714,152.6 654.5,152.6 C655.584286,152.6 656.464286,153.496 656.464286,154.6 C656.464286,155.704 655.584286,156.6 654.5,156.6 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

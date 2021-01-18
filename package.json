@@ -1,0 +1,47 @@
+{
+  "name": "motomob",
+  "version": "1.0.0",
+  "description": "Motomob core",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "jest",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Arun Ranganathan",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.2.6",
+    "apollo-server": "^2.16.1",
+    "apollo-server-express": "^2.16.1",
+    "aws-sdk": "^2.735.0",
+    "axios": "^0.19.2",
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.19",
+    "moment": "^2.29.1",
+    "mongoose": "^5.9.24",
+    "newrelic": "^6.13.2",
+    "passport": "^0.4.1",
+    "passport-facebook-token": "^4.0.0",
+    "passport-google-token": "^0.1.2",
+    "pug": "^3.0.0",
+    "s3-streamlogger": "^1.7.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "faker": "^5.1.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Business</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Profile" transform="translate(-1066.000000, -424.000000)" fill="#BABECB" fill-rule="nonzero">
+            <g id="Right-Menu" transform="translate(1064.000000, 112.000000)">
+                <path d="M10,325 L10,324 L3.01,324 L3,328 C3,329.11 3.89,330 5,330 L19,330 C20.11,330 21,329.11 21,328 L21,324 L14,324 L14,325 L10,325 Z M20,316 L15.99,316 L15.99,314 L13.99,312 L9.99,312 L7.99,314 L7.99,316 L4,316 C2.9,316 2,316.9 2,318 L2,321 C2,322.11 2.89,323 4,323 L10,323 L10,321 L14,321 L14,323 L20,323 C21.1,323 22,322.1 22,321 L22,318 C22,316.9 21.1,316 20,316 Z M14,316 L10,316 L10,314 L14,314 L14,316 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

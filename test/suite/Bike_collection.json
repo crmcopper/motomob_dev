@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "fb0e3b12-c898-4040-9b2c-4fcb604f50ff",
+		"name": "Motomob Bikes test suites",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signin with test user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e0c2438-78d5-4555-aca3-e145ca840553",
+						"exec": [
+							"pm.test(\"user should login\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"verifyToken\",jsonData.data.signin.token)\r",
+							"    pm.environment.set(\"userId\",jsonData.data.signin.id)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation signin ($username: String!, $password: String!) {\r\n    signin (username: $username, password: $password) {\r\n        id\r\n        name\r\n        username\r\n        email\r\n        avatarUrl\r\n        token\r\n        usertag\r\n        admin\r\n        ownBikes {\r\n            bikeId\r\n            bikename\r\n            thumbUrl\r\n            prodStartYear\r\n        }\r\n        followBikes {\r\n            bikeId\r\n            bikename\r\n            thumbUrl\r\n            prodStartYear\r\n        }\r\n        location\r\n        createdAt\r\n        bikes\r\n        status\r\n    }\r\n}",
+						"variables": "{\r\n  \"username\": \"motobot\",\r\n  \"password\": \"test@123\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBikes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4773a308-eac2-4c65-bd9e-1ac15933bfb6",
+						"exec": [
+							"pm.test('get bikes list', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data).not.eq(null)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($first: Int, $after: ID, $search: String) {\n    getBikes(first: $first, after: $after, search: $search) {\n      edges {\n        node {\n          id\n          bikename\n          description\n          storyUrl\n          isActive\n          pictureUrls\n          brand\n          category\n          thumbUrl\n          prodStartYear\n          prodEndYear\n          createdAt\n        }\n        cursor\n      }\n      pageInfo {\n        hasNextPage\n        startCursor\n        endCursor\n      }\n    }\n  }",
+						"variables": "{\n  \"first\": 10, \"after\": null, \"search\": \"suzuki\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBike",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6febab47-ad03-444f-aea1-736b038824d8",
+						"exec": [
+							"pm.test('get bike by id', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.getBike).not.eq(undefined)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getBike ($bikeId: ID!) {\n    getBike (bikeId: $bikeId) {\n        id\n        bikeId\n        bikename\n        description\n        storyUrl\n        isActive\n        pictureUrls\n        brand\n        category\n        thumbUrl\n        prodStartYear\n        prodEndYear\n        createdAt\n    }\n}",
+						"variables": "{\n  \"bikeId\": \"5f7b15531bfc2c16b0dbf6b1\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBikeByName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8d997b27-eddc-47fe-8ee7-59c5e1741f59",
+						"exec": [
+							"pm.test('get bike by name', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.getBikeByName).not.eq(undefined)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getBikeByName ($bikename: String) {\n    getBikeByName (bikename: $bikename) {\n        id\n        bikeId\n        bikename\n        description\n        storyUrl\n        isActive\n        pictureUrls\n        brand\n        category\n        thumbUrl\n        prodStartYear\n        prodEndYear\n        createdAt\n    }\n}",
+						"variables": "{\n  \"bikename\": \"Hero\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

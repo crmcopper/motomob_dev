@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Events</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Profile" transform="translate(-1067.000000, -370.000000)" fill="#e83f3f" fill-rule="nonzero">
+            <g id="Right-Menu" transform="translate(1064.000000, 112.000000)">
+                <path d="M17,267 L7,267 L7,269 L17,269 L17,267 Z M19,260 L18,260 L18,258 L16,258 L16,260 L8,260 L8,258 L6,258 L6,260 L5,260 C3.89,260 3.01,260.9 3.01,262 L3,276 C3,277.1 3.89,278 5,278 L19,278 C20.1,278 21,277.1 21,276 L21,262 C21,260.9 20.1,260 19,260 Z M19,276 L5,276 L5,265 L19,265 L19,276 Z M14,271 L7,271 L7,273 L14,273 L14,271 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

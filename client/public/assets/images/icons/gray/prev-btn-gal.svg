@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="25px" viewBox="0 0 16 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Path Copy</title>
+    <g id="Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="View-Picture" transform="translate(-2.000000, -808.000000)" fill="#babecb" fill-rule="nonzero">
+            <g id="cheveron-right" transform="translate(2.000000, 807.859525)">
+                <polygon id="Path-Copy" transform="translate(8.000000, 12.640475) scale(-1, 1) translate(-8.000000, -12.640475) " points="14.4002263 14.2026989 16 12.6404751 3.19954745 0.140475105 2.00973762e-15 3.26492269 9.59864234 12.6404751 0 22.0160275 3.19954745 25.1404751"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="15px" viewBox="0 0 19 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>user-add copy</title>
+    <g id="Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Other-User-profile---other-user" transform="translate(-570.000000, -200.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Follow" transform="translate(544.000000, 184.000000)">
+                <g id="user-add-copy" transform="translate(26.000000, 16.000000)">
+                    <path d="M2,4 L0,4 L0,6 L2,6 L4,6 L6,6 L6,4 L4,4 L2,4 Z M8,3 C8,1.34314575 9.34314575,0 11,0 C12.6568542,0 14,1.34314575 14,3 L14,5 C14,6.65685425 12.6568542,8 11,8 C9.34314575,8 8,6.65685425 8,5 L8,3 Z M19,12.14 C16.5686207,10.7338806 13.8086932,9.99560002 11,9.99998045 C8.09,9.99998045 5.35,10.78 3,12.14 L3,15 L19,15 L19,12.14 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

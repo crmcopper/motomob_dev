@@ -1,0 +1,888 @@
+{
+	"info": {
+		"_postman_id": "93411ff6-1c26-4f2f-993b-9f77a41cfd52",
+		"name": "Motomob User Test Suites",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f3121738-179f-4879-a805-97178db1ee3d",
+						"exec": [
+							"pm.test(\"should create a new user\", function () {\r",
+							"    let registerData = JSON.parse(pm.request.body.graphql.variables)\r",
+							"    console.log(registerData, \"cdscsdcds\")\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.signup.id).not.eq(undefined)\r",
+							"    pm.environment.set(\"verifyToken\", jsonData.data.signup.token)\r",
+							"    pm.environment.set(\"userId\", jsonData.data.signup.id)\r",
+							"    pm.environment.set(\"username\", jsonData.data.signup.username)\r",
+							"    pm.environment.set(\"avatarUrl\", jsonData.data.signup.avatarUrl)\r",
+							"    pm.environment.set(\"userpassword\", registerData.registerInput.password)\r",
+							"    pm.environment.set(\"isAdminUser\", jsonData.data.signup.admin)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error username is already taken\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error email is already taken\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"should not throw error Name must not be empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"should not throw error User name must not be empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error Email must not be empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error Email must be a valid email address\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error Password must not empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error Location must not empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error Atleast one bike must be selected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should not throw error Atleast one bike must be selected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors).eq(undefined)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation signup ($registerInput: RegisterInput) {\n    signup (registerInput: $registerInput) {\n        id\n        name\n        username\n        email\n        avatarUrl\n        token\n        usertag\n        admin\n        ownBikes {\n            bikeId\n            bikename\n        }\n        followBikes {            \n            bikeId\n        }\n        location\n        createdAt\n        bikes\n        followers {\n            id\n            name\n            username\n            email\n            avatarUrl\n            token\n            usertag\n            admin\n            ownBikes {\n                id\n                bikeId\n                bikename\n                description\n                storyUrl\n                isActive\n                pictureUrls\n                brand\n                category\n                thumbUrl\n                prodStartYear\n                prodEndYear\n                createdAt\n            }\n            followBikes {\n                id\n                bikeId\n                bikename\n                description\n                storyUrl\n                isActive\n                pictureUrls\n                brand\n                category\n                thumbUrl\n                prodStartYear\n                prodEndYear\n                createdAt\n            }\n            location\n            createdAt\n            bikes\n            followers {\n                id\n                name\n                username\n                email\n                avatarUrl\n                token\n                usertag\n                admin\n                location\n                createdAt\n                bikes\n                followersCount\n                followUsers {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    status\n                }\n                following {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    status\n                }\n                status\n            }\n            followersCount\n            status\n        }\n        followersCount\n        followUsers {\n            id\n            name\n            username\n            email\n            avatarUrl\n            token\n            usertag\n            admin\n            location\n            createdAt\n            bikes\n            followersCount\n            status\n        }\n        following {\n            id\n            name\n            username\n            email\n            avatarUrl\n            token\n            usertag\n            admin\n            location\n            createdAt\n            bikes\n            followersCount\n            status\n        }\n        status\n    }\n}",
+						"variables": "{\n  \"registerInput\": {\n    \"username\": \"test99{{$randomInt}}\",\n    \"name\": \"{{$randomFirstName}}\",\n    \"avatarUrl\": \"https://motomob-test.s3.eu-west-2.amazonaws.com/users/5f55e78eca03ca00178a4771\",\n    \"password\": \"{{$randomPassword}}\",\n    \"location\": \"{{$randomCity}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"ownBikes\": {\n      \"bikeId\": \"5f37eeb86b86c04c2865b108\",\n      \"bikename\": \"AJP GALP 50 Enduro - 2005\",\n      \"thumbUrl\": \"https://motomob-test.s3.eu-west-2.amazonaws.com/bikes/tc6dd-ajp-pr3-125-enduro-pro-2015-moto.jpeg\",\n      \"prodStartYear\": \"2005\"\n    }\n  }\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirmEmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "707365e0-78e2-4f48-be81-b5cefac62706",
+						"exec": [
+							"pm.test(\"Should Verify new user to that user\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log('jsonData',jsonData)\r",
+							"    pm.expect(jsonData.data.confirmEmail.id).eq(pm.environment.get(\"userId\"))\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should have same username\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.confirmEmail.username).eq(pm.environment.get(\"username\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation confirmEmail ($token: String!) {\n    confirmEmail (token: $token) {\n        id\n        name\n        username\n        email\n        avatarUrl\n        token\n        usertag\n        admin\n        ownBikes {\n            bikeId\n            bikename\n            thumbUrl\n            prodStartYear\n        }\n        followBikes {\n            bikeId\n            bikename\n            thumbUrl\n            prodStartYear\n        }\n    }\n}",
+						"variables": "{\n  \"token\": \"{{verifyToken}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ffee38dc-3653-436d-be98-7fb7b0744001",
+						"exec": [
+							"pm.test(\"user should signin without fail\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.signin.id).eq(pm.environment.get(\"userId\"))\r",
+							"    pm.expect(jsonData.data.signin.token).not.eq(undefined)\r",
+							"    pm.environment.set(\"verifyToken\",jsonData.data.signin.token)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation signin ($username: String!, $password: String!) {\n    signin (username: $username, password: $password) {\n        id\n        name\n        username\n        email\n        avatarUrl\n        token\n        usertag\n        admin\n        ownBikes {\n            bikeId\n            bikename\n            thumbUrl\n            prodStartYear\n        }\n        followBikes {\n            bikeId\n            bikename\n            thumbUrl\n            prodStartYear\n        }\n        location\n        createdAt\n        bikes\n        status\n    }\n}",
+						"variables": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{userpassword}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "01304874-dc41-469f-9573-32bace26c23c",
+						"exec": [
+							"pm.test('user can edit their own profile', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.editUser.id).eq(pm.environment.get(\"userId\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation editUser ($userId: ID!, $name: String, $avatarUrl: String, $avatarFile: String, $email: String, $username: String, $location: String, $usertag: String) {\n    editUser (userId: $userId, name: $name, avatarUrl: $avatarUrl, avatarFile: $avatarFile, email: $email, username: $username, location: $location, usertag: $usertag) {\n        id\n        name\n        username\n        email\n        avatarUrl\n        usertag\n        admin\n        ownBikes {\n            bikeId\n            bikename\n            description\n            storyUrl\n            isActive\n            pictureUrls\n            brand\n            category\n            thumbUrl\n            prodStartYear\n            prodEndYear\n            createdAt\n        }\n        followBikes {\n            bikeId\n            bikename\n            description\n            storyUrl\n            isActive\n            pictureUrls\n            brand\n            category\n            thumbUrl\n            prodStartYear\n            prodEndYear\n            createdAt\n        }\n        location\n        createdAt\n        bikes\n        followers {\n            name\n            username\n            email\n            avatarUrl\n            usertag\n            admin\n            ownBikes {\n                id\n                bikeId\n                bikename\n                description\n                storyUrl\n                isActive\n                pictureUrls\n                brand\n                category\n                thumbUrl\n                prodStartYear\n                prodEndYear\n                createdAt\n            }\n            followBikes {\n                bikeId\n                bikename\n                description\n                storyUrl\n                isActive\n                pictureUrls\n                brand\n                category\n                thumbUrl\n                prodStartYear\n                prodEndYear\n                createdAt\n            }\n            location\n            createdAt\n            bikes\n            followers {\n                id\n                name\n                username\n                email\n                avatarUrl\n                usertag\n                admin\n                location\n                createdAt\n                bikes\n                followersCount\n                followUsers {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    status\n                }\n                following {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    status\n                }\n                status\n            }\n            followersCount\n            status\n        }\n        followersCount\n        followUsers {\n            id\n            name\n            username\n            email\n            avatarUrl\n            token\n            usertag\n            admin\n            location\n            createdAt\n            bikes\n            followersCount\n            status\n        }\n        following {\n            id\n            name\n            username\n            email\n            avatarUrl\n            token\n            usertag\n            admin\n            location\n            createdAt\n            bikes\n            followersCount\n            status\n        }\n        status\n    }\n}",
+						"variables": "{\n  \"userId\": \"{{userId}}\",\n  \"name\": \"{{$randomFullName}}\",\n  \"avatarUrl\": \"{{$randomPeopleImage}}\",\n  \"avatarFile\": \"\",\n  \"email\": \"{{$randomEmail}}\",\n  \"username\": \"{{username}}\",\n  \"location\": \"{{$randomCity}}\",\n  \"usertag\": \"{{$randomDomainWord}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6120dc93-aad4-4d30-970c-bea0e81f7ca2",
+						"exec": [
+							"pm.test(\"Should Verify new user to that user\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.getUsers[0].id).not.eq(undefined)\r",
+							"    pm.environment.set(\"followUserId\", jsonData.data.getUsers[0].id)\r",
+							"    pm.environment.set(\"followUsername\", jsonData.data.getUsers[0].username)\r",
+							"    pm.environment.set(\"followavatarUrl\", jsonData.data.getUsers[0].avatarUrl)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getUsers ($username: String!) {\n    getUsers (username: $username) {\n        id\n      email\n      avatarUrl\n      username\n      location\n      followersCount\n      bikes\n      ownBikes {\n        bikename\n      }\n    }\n}",
+						"variables": "{\n  \"username\": \"\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "followUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ddb5c371-cbe5-46c3-b82a-35f35906972e",
+						"exec": [
+							"pm.test(\"user can follow other users\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.followUser.id).eq(pm.environment.get(\"followUserId\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation followUser ($userId: String!, $username: String!, $avatarUrl: String!) {\n    followUser (userId: $userId, username: $username, avatarUrl: $avatarUrl) {\n       id\n      name\n      username\n      email\n      avatarUrl\n      followersCount\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followers {\n        id\n        username\n        avatarUrl\n      }\n      following {\n        id\n        username\n        avatarUrl\n      }\n      usertag\n      status\n    }\n}",
+						"variables": "{\n  \"userId\": \"{{followUserId}}\",\n  \"username\": \"{{followUsername}}\",\n  \"avatarUrl\": \"{{followavatarUrl}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef6a24fc-ef9a-45bf-9276-9cde4ed0e1ca",
+						"exec": [
+							"pm.test(\"Should have arun in following list\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let index = jsonData.data.getUser.following.findIndex(x => x.id===pm.environment.get(\"followUserId\"))\r",
+							"    pm.expect(index).not.eq(-1)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should get same user data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.getUser.id).eq(pm.environment.get(\"userId\"))\r",
+							"    pm.expect(jsonData.data.getUser.username).eq(pm.environment.get(\"username\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getUser ($userId: ID!) {\n    getUser (userId: $userId) {\n        id\n      name\n      username\n      email\n      avatarUrl\n      followersCount\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followers {\n        id\n        username\n\t      avatarUrl\n      }\n      following {\n        id\n        username\n\t      avatarUrl\n      }\n      usertag\n      status\n    }\n}",
+						"variables": "{\n  \"userId\": \"{{userId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addBikes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e2a14cfd-3a1c-4871-8188-3b6aa0d6829d",
+						"exec": [
+							"pm.test('user can add new bikes in followBikes array', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(JSON.parse(pm.request.body.graphql.variables).bikes.bikeId, \"dfvdfvfdscdsc\")\r",
+							"    var index = jsonData.data.addBikes.ownBikes.findIndex(x => x.bikeId === JSON.parse(pm.request.body.graphql.variables).bikes.bikeId)\r",
+							"    pm.expect(index).not.eq(-1)\r",
+							"    pm.environment.set(\"userOwnBike\", JSON.parse(pm.request.body.graphql.variables).bikes.bikeId)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation addBikes ($bikes: [BikesInPost], $type: String!) {\n    addBikes (bikes: $bikes, type: $type) {\n        id\n      email\n      name\n      username\n      avatarUrl\n      admin\n      usertag\n      bikes\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n    }\n}",
+						"variables": "{\n  \"bikes\": {\n    \"bikeId\": \"5f37eeb86b86c04c2865b10c\",\n    \"bikename\": \"AJP PR3 125 Enduro Pro - 2015\",\n    \"thumbUrl\": \"https://motomob-stage.s3.eu-west-2.amazonaws.com/bikes/tc6dd-ajp-pr3-125-enduro-pro-2015-moto.jpeg\",\n    \"prodStartYear\": \"2019\"\n  },\n  \"type\": \"Own\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "followBike",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "14301a35-558c-4097-a09f-667e180105b9",
+						"exec": [
+							"pm.test('should add in followBike', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(JSON.parse(pm.request.body.graphql.variables).bikes.bikeId, \"dscdscds\")\r",
+							"    var index = jsonData.data.followBike.followBikes.findIndex(x => x.bikeId === JSON.parse(pm.request.body.graphql.variables).bikes.bikeId)\r",
+							"    pm.environment.set(\"userFollowBikes\", JSON.parse(pm.request.body.graphql.variables).bikes.bikeId)\r",
+							"    pm.expect(index).not.eq(-1)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation followBike ($bikes: [BikesInPost]) {\n    followBike (bikes: $bikes) {\n        id\n      email\n      name\n      username\n      avatarUrl\n      admin\n      usertag\n      bikes\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n    }\n}",
+						"variables": "{\n  \"bikes\": {\n    \"bikeId\": \"5f37eeb86b86c04c2865b10c\",\n    \"bikename\": \"AJP PR3 125 Enduro Pro - 2015\",\n    \"thumbUrl\": \"https://motomob-stage.s3.eu-west-2.amazonaws.com/bikes/tc6dd-ajp-pr3-125-enduro-pro-2015-moto.jpeg\",\n    \"prodStartYear\": \"2019\"\n  }\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserFollowBikes",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "60ae39a3-a696-4149-a59a-9ac75fc503c4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "856096b6-5ff9-41c0-84a5-5683e35293af",
+						"exec": [
+							"pm.test('Bike should present in user follow list', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var index = jsonData.data.getUserFollowBikes.followBikes.findIndex(x => x.bikeId === pm.environment.get(\"userFollowBikes\"))\r",
+							"    pm.expect(index).not.eq(-1)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getUserFollowBikes ($userId: ID!) {\n    getUserFollowBikes (userId: $userId) {\n        id\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n    }\n}",
+						"variables": "{\n  \"userId\": \"{{userId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unfollowBike",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e040168-a703-4aa1-86b8-7ec51c045547",
+						"exec": [
+							"pm.test('should add in followBike', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(JSON.parse(pm.request.body.graphql.variables).bikes.bikeId, \"dscdscds\")\r",
+							"    var index = jsonData.data.followBike.followBikes.findIndex(x => x.bikeId === JSON.parse(pm.request.body.graphql.variables).bikes.bikeId)\r",
+							"    pm.environment.set(\"userFollowBikes\", JSON.parse(pm.request.body.graphql.variables).bikes.bikeId)\r",
+							"    pm.expect(index).eq(-1)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation followBike ($bikes: [BikesInPost]) {\r\n    followBike (bikes: $bikes) {\r\n        id\r\n      email\r\n      name\r\n      username\r\n      avatarUrl\r\n      admin\r\n      usertag\r\n      bikes\r\n      location\r\n      ownBikes {\r\n        bikeId\r\n        bikename\r\n        thumbUrl\r\n        prodStartYear\r\n      }\r\n      followBikes {\r\n        bikeId\r\n        bikename\r\n        thumbUrl\r\n        prodStartYear\r\n      }\r\n    }\r\n}",
+						"variables": "{\r\n  \"bikes\": {\r\n    \"bikeId\": \"5f37eeb86b86c04c2865b10c\",\r\n    \"bikename\": \"AJP PR3 125 Enduro Pro - 2015\",\r\n    \"thumbUrl\": \"https://motomob-stage.s3.eu-west-2.amazonaws.com/bikes/tc6dd-ajp-pr3-125-enduro-pro-2015-moto.jpeg\",\r\n    \"prodStartYear\": \"2019\"\r\n  }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserFollowBikes - RE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dcd33353-9f48-435c-9ac4-93808a9bfac7",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d1ad704-3048-42f3-ba85-aa31de275af1",
+						"exec": [
+							"pm.test('Bike should present in user follow list', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var index = jsonData.data.getUserFollowBikes.followBikes.findIndex(x => x.bikeId === pm.environment.get(\"userFollowBikes\"))\r",
+							"    pm.expect(index).eq(-1)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getUserFollowBikes ($userId: ID!) {\n    getUserFollowBikes (userId: $userId) {\n        id\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n    }\n}",
+						"variables": "{\n  \"userId\": \"{{userId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserOwnBikes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c400e27-015a-40b0-9e91-2034b2bdd0b5",
+						"exec": [
+							"pm.test('user must have 5f37eeb86b86c04c2865b10c this bike in ownBike', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var index = jsonData.data.getUserOwnBikes.ownBikes.findIndex(x => x.bikeId === pm.environment.get(\"userOwnBike\"))\r",
+							"    pm.expect(index).not.eq(-1)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getUserOwnBikes ($userId: ID!) {\n    getUserOwnBikes (userId: $userId) {\n        id\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n    }\n}",
+						"variables": "{\n  \"userId\": \"{{userId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resendEmail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a7be7b3c-a575-49c6-ad1d-b159a1b34c28",
+						"exec": [
+							"pm.test('should not sent mail', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.resendEmail).not.eq(undefined)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation resendEmail ($userId: ID) {\n    resendEmail (userId: $userId)\n}",
+						"variables": "{\n  \"userId\": \"{{userId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUserBike",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "498d0ce6-b7cd-4f78-be74-4e8d1ff597b5",
+						"exec": [
+							"pm.test('normal user can delete their own bike', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.deleteUserBike.id).not.eq(undefined)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation deleteUserBike ($userId: ID!, $bikeId: String!, $type: String!) {\n    deleteUserBike (userId: $userId, bikeId: $bikeId, type: $type) {\n        id\n      email\n      name\n      username\n      avatarUrl\n      admin\n      usertag\n      bikes\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n    }\n}",
+						"variables": "{\n  \"userId\": \"{{userId}}\",\n  \"bikeId\": \"5f37eeb86b86c04c2865b10c\",\n  \"type\": \"Own\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "notificationFrequncyDaily",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "914a4ae7-3ce6-4b37-9fa6-ceab5300507d",
+						"exec": [
+							"pm.test('should return daily in notification', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.saveNotificationFrequency.notificationFrequency).eq('daily')",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation saveNotificationFrequency($frequency: String!) {\n    saveNotificationFrequency(frequency: $frequency) {\n      id\n      name\n      username\n      email\n      avatarUrl\n      followersCount\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followers {\n        id\n        username\n        avatarUrl\n      }\n      following {\n        id\n        username\n        avatarUrl\n      }\n      usertag\n      status\n      notificationFrequency\n    }\n  }",
+						"variables": "{\n  \"frequency\": \"daily\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "notificationFrequncyWeekly",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0f0f7c6-f1b0-4670-8fab-3e7947b30bae",
+						"exec": [
+							"pm.test('should return daily in notification', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.saveNotificationFrequency.notificationFrequency).eq('weekly')",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation saveNotificationFrequency($frequency: String!) {\n    saveNotificationFrequency(frequency: $frequency) {\n      id\n      name\n      username\n      email\n      avatarUrl\n      followersCount\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followers {\n        id\n        username\n        avatarUrl\n      }\n      following {\n        id\n        username\n        avatarUrl\n      }\n      usertag\n      status\n      notificationFrequency\n    }\n  }",
+						"variables": "{\n  \"frequency\": \"weekly\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "notificationFrequncyOff",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c952bab2-41bf-4fbc-a36a-67754079e8f0",
+						"exec": [
+							"pm.test('should return daily in notification', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.saveNotificationFrequency.notificationFrequency).eq('off')",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation saveNotificationFrequency($frequency: String!) {\n    saveNotificationFrequency(frequency: $frequency) {\n      id\n      name\n      username\n      email\n      avatarUrl\n      followersCount\n      location\n      ownBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followBikes {\n        bikeId\n        bikename\n        thumbUrl\n        prodStartYear\n      }\n      followers {\n        id\n        username\n        avatarUrl\n      }\n      following {\n        id\n        username\n        avatarUrl\n      }\n      usertag\n      status\n      notificationFrequency\n    }\n  }",
+						"variables": "{\n  \"frequency\": \"off\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

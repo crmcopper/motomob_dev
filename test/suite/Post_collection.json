@@ -1,0 +1,871 @@
+{
+	"info": {
+		"_postman_id": "ceec8012-09ef-4b47-bf2a-85057b3225e1",
+		"name": "Motomob Post Test Suites",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signin with test user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e56b3266-1075-4141-ae35-d3a1676be720",
+						"exec": [
+							"pm.test(\"user should login\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"verifyToken\",jsonData.data.signin.token)\r",
+							"    pm.environment.set(\"userId\",jsonData.data.signin.id)\r",
+							"    pm.environment.set(\"avatarUrl\", jsonData.data.signin.avatarUrl)\r",
+							"    pm.environment.set(\"name\", jsonData.data.signin.name)\r",
+							"    pm.environment.set(\"username\", jsonData.data.signin.username)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation signin ($username: String!, $password: String!) {\r\n    signin (username: $username, password: $password) {\r\n        id\r\n        name\r\n        username\r\n        email\r\n        avatarUrl\r\n        token\r\n        usertag\r\n        admin\r\n        ownBikes {\r\n            bikeId\r\n            bikename\r\n            thumbUrl\r\n            prodStartYear\r\n        }\r\n        followBikes {\r\n            bikeId\r\n            bikename\r\n            thumbUrl\r\n            prodStartYear\r\n        }\r\n        location\r\n        createdAt\r\n        bikes\r\n        status\r\n    }\r\n}",
+						"variables": "{\r\n  \"username\": \"motobot\",\r\n  \"password\": \"test@123\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shareAndUpdatePost",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7aed980e-5e9e-4df9-8b78-cdd52cad4ebd",
+						"exec": [
+							"pm.test(\"should create post successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.createCommonPost.id).not.eq(undefined)\r",
+							"    pm.environment.set(\"postId\", jsonData.data.createCommonPost.id)\r",
+							"});\r",
+							"\r",
+							"pm.test('should create post by same user', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.createCommonPost.userId).eq(pm.environment.get(\"userId\"))\r",
+							"});\r",
+							"\r",
+							"pm.test('post must has type eq BasicPost', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.createCommonPost.postType).eq(\"BasicPost\")\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createCommonPost(\n    $postId: ID\n    $postType: String!\n    $title: String!\n    $previewBody: String!\n    $previewMedia: String\n    $bikes: [BikesInPost]\n    $body: String!\n    $avatarUrl: String!\n    $username: String!\n    $name: String!\n    $userId: String!\n    $userbikes: String!\n    $pictureUrls: [String]\n    $embedPicture: String!\n    $location: [String!]\n    $when: String\n    $days: Int\n    $offRoadPercentage: Int\n    $gpxFiles: [String!]\n    $quesType: String\n    $additionalTag: String\n  ) {\n    createCommonPost(\n      postId: $postId\n      postType: $postType\n      title: $title\n      bikes: $bikes\n      previewBody: $previewBody,\n      previewMedia: $previewMedia,\n      body: $body\n      avatarUrl: $avatarUrl\n      username: $username\n      name: $name\n      userId: $userId\n      userbikes: $userbikes\n      pictureUrls: $pictureUrls\n      embedPicture: $embedPicture\n      location: $location\n      when: $when\n      days: $days\n      offRoadPercentage: $offRoadPercentage\n      gpxFiles: $gpxFiles\n      quesType: $quesType\n      additionalTag: $additionalTag\n    ) {\n      id\n      body\n      title\n      createdAt\n      username\n      name\n      avatarUrl\n      userId\n      userbikes\n      likeCount\n      likes {\n        username\n      }\n      commentCount\n      postag\n      postType\n      pictureUrls\n      bikes {\n        bikeId\n        bikename\n        thumbUrl\n      }\n      location\n      when\n      days\n      offRoadPercentage\n      gpxFiles\n    }\n  }",
+						"variables": "{\n  \"title\": \"\",\n  \"bikes\": [],\n  \"body\": \"sdfsdfsdf {{$randomLoremParagraph}}\",\n  \"previewBody\": \"sdfsdfsdf{{$randomLoremParagraph}}\",\n  \"previewMedia\":\"\",\n  \"pictureUrls\": [\n    \"https://motomob-test.s3.eu-west-2.amazonaws.com/posts/fyczh-img-4028.jpeg\"\n  ],\n  \"location\": [],\n  \"when\": \"\",\n  \"days\": 0,\n  \"offRoadPercentage\": 0,\n  \"gpxFiles\": [],\n  \"username\": \"{{username}}\",\n  \"userId\": \"{{userId}}\",\n  \"userbikes\": \"AJP GALP 50 Enduro - 2005\",\n  \"avatarUrl\": \"{{avatarUrl}}\",\n  \"postType\":\"BasicPost\",\n  \"name\":\"{{name}}\",\n  \"embedPicture\":\"\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPosts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf6637ad-2e82-442b-94eb-0e5f4a321310",
+						"exec": [
+							"pm.test('should contain cursor', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.getUserPosts.cursor).not.eq(undefined)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getUserPosts ($cursor: String, $userId: String, $limit: Int) {\n    getUserPosts (cursor: $cursor, userId: $userId, limit: $limit) {\n        posts {\n            id\n            body\n            createdAt\n            username\n            userId\n            userbikes\n            avatarUrl\n            comments {\n                id\n                postId\n                replyToId\n                createdAt\n                username\n                userId\n                userbikes\n                avatarUrl\n                body\n                replies {\n                    id\n                    postId\n                    replyToId\n                    createdAt\n                    username\n                    userId\n                    userbikes\n                    avatarUrl\n                    body\n                    replies {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    likes {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    likeCount\n                    dislikes {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    dislikeCount\n                }\n                likes {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        bikeId\n                        bikename\n                        thumbUrl\n                        prodStartYear\n                    }\n                    followBikes {\n                        bikeId\n                        bikename\n                        thumbUrl\n                        prodStartYear\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    status\n                }\n                likeCount\n                dislikes {\n                    id\n                    postId\n                    replyToId\n                    createdAt\n                    username\n                    userId\n                    userbikes\n                    avatarUrl\n                    body\n                    replies {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    likes {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        status\n                    }\n                    likeCount\n                    dislikes {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    dislikeCount\n                }\n                dislikeCount\n            }\n            likes {\n                username\n            }\n            likeCount\n            commentCount\n            title\n            postType\n            isActive\n            postag\n            bikes {\n                bikeId\n                bikename\n                thumbUrl\n                prodStartYear\n            }\n            pictureUrls\n            location\n            when\n            days\n            offRoadPercentage\n            gpxFiles\n            savedtag\n            saveCount\n        }\n        cursor\n    }\n}",
+						"variables": "{\n  \"cursor\": \"\",\n  \"userId\": \"{{userId}}\",\n  \"limit\": 10,\n  \"type\":\"posts\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPost",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f3b539b3-f12f-4add-948b-a55763afeca8",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f54560f-f1d9-449c-a13a-4151e9a25cf0",
+						"exec": [
+							"pm.test('should get same post', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(jsonData, \"csdcdscds\")\r",
+							"    pm.expect(jsonData.data.getPost.id).eq(pm.environment.get(\"postId\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getPost ($postId: ID!) {\n    getPost (postId: $postId) {\n        id\n        body\n        createdAt\n        username\n        userId\n        userbikes\n        avatarUrl\n        comments {\n            id\n            postId\n            replyToId\n            createdAt\n            username\n            userId\n            userbikes\n            avatarUrl\n            body\n            replies {\n                id\n                postId\n                replyToId\n                createdAt\n                username\n                userId\n                userbikes\n                avatarUrl\n                body\n                replies {\n                    id\n                    postId\n                    replyToId\n                    createdAt\n                    username\n                    userId\n                    userbikes\n                    avatarUrl\n                    body\n                    likes {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n\n                        status\n                    }\n                    likeCount\n                    dislikes {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    dislikeCount\n                }\n                likeCount\n                dislikeCount\n            }\n            likes {\n                id\n                name\n                username\n                email\n                avatarUrl\n                token\n                usertag\n                admin\n                ownBikes {\n                    id\n                    bikeId\n                    bikename\n                    description\n                    storyUrl\n                    isActive\n                    pictureUrls\n                    brand\n                    category\n                    thumbUrl\n                    prodStartYear\n                    prodEndYear\n                    createdAt\n                }\n                followBikes {\n                    id\n                    bikeId\n                    bikename\n                    description\n                    storyUrl\n                    isActive\n                    pictureUrls\n                    brand\n                    category\n                    thumbUrl\n                    prodStartYear\n                    prodEndYear\n                    createdAt\n                }\n                location\n                createdAt\n                bikes\n                followers {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    \n                    status\n                }\n                followersCount\n                followUsers {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    \n                    status\n                }\n                following {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        \n                        status\n                    }\n                    \n                    status\n                }\n                \n                status\n            }\n            likeCount\n            dislikes {\n                id\n                postId\n                replyToId\n                createdAt\n                username\n                userId\n                userbikes\n                avatarUrl\n                body\n                replies {\n                    id\n                    postId\n                    replyToId\n                    createdAt\n                    username\n                    userId\n                    userbikes\n                    avatarUrl\n                    body\n                    likeCount\n                    dislikeCount\n                }\n                likes {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    location\n                    createdAt\n                    bikes\n                    followersCount\n                    \n                    status\n                }\n                likeCount\n                dislikes {\n                    id\n                    postId\n                    replyToId\n                    createdAt\n                    username\n                    userId\n                    userbikes\n                    avatarUrl\n                    body\n                    likeCount\n                    dislikeCount\n                }\n                dislikeCount\n            }\n            dislikeCount\n        }\n        likes {\n            username\n        }\n        likeCount\n        commentCount\n        title\n        postType\n        isActive\n        postag\n        bikes {\n            bikeId\n            bikename\n            thumbUrl\n            prodStartYear\n        }\n        pictureUrls\n        location\n        when\n        days\n        offRoadPercentage\n        gpxFiles\n        savedtag\n        saveCount\n    }\n}",
+						"variables": "{\n  \"postId\": \"{{postId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "likePost",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5001ccdb-0a95-47fe-8d34-2d6b32452d0d",
+						"exec": [
+							"pm.test(\"should like post\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.likePost.id).eq(pm.environment.get(\"postId\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation likePost($postId: ID!) {\n    likePost(postId: $postId) {\n      id\n      body\n      title\n      createdAt\n      username\n      avatarUrl\n      userId\n      userbikes\n      likeCount\n      pictureUrls\n      userbikes\n      postType\n      location\n      when\n      days\n      offRoadPercentage\n      gpxFiles\n      bikes {\n        bikeId\n        bikename\n        thumbUrl\n      }\n      likes {\n        username\n        id\n      }\n      commentCount\n      postag\n      savedtag\n      saveCount\n    }\n  }",
+						"variables": "{\n  \"postId\": \"{{postId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createComment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c7612d56-3405-49ff-ae5a-55bdb413dfbb",
+						"exec": [
+							"pm.test(\"should create comment\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.createComment.comment.id).not.eq(undefined)\r",
+							"    pm.environment.set(\"commentId\", jsonData.data.createComment.comment.id)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": " mutation($postId: ID!, $body: String!, $replyToId: String, $avatarUrl: String!, $userbikes: String!, $username: String!, $userId: String!, $name: String!) {\n    createComment(\n      postId: $postId\n      body: $body\n      replyToId: $replyToId\n      avatarUrl: $avatarUrl\n      userbikes: $userbikes\n      username: $username\n      userId: $userId\n      name: $name\n    ) {\n      comment {\n        id\n        replyToId\n        postId\n        avatarUrl\n        userbikes\n        username\n        name\n        userId\n        createdAt\n        body\n      }\n\n      post {\n        id\n        body\n        title\n        createdAt\n        username\n        avatarUrl\n        userId\n        userbikes\n        likeCount\n        pictureUrls\n        userbikes\n        postType\n        location\n        when\n        days\n        offRoadPercentage\n        gpxFiles\n        bikes {\n          bikeId\n          bikename\n          thumbUrl\n        }\n        likes {\n          username\n        }\n        commentCount\n        postag\n        savedtag\n        saveCount\n      }\n    }\n  }\n  ",
+						"variables": "{\n  \"postId\": \"{{postId}}\",\n  \"body\": \"${{$randomLoremParagraph}}\",\n  \"replyToId\": \"\",\n  \"username\": \"{{username}}\",\n  \"userId\": \"{{userId}}\",\n  \"userbikes\": \"AJP GALP 50 Enduro - 2005\",\n  \"avatarUrl\": \"{{avatarUrl}}\",\n   \"name\": \"{{name}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "likeComment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb400f70-ce8c-4945-a6c2-c36d34604efe",
+						"exec": [
+							"pm.test(\"user should like comment\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.likeComment[0].id).eq(pm.environment.get(\"commentId\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation likeComment ($commentId: ID, $postId: ID) {\n    likeComment (commentId: $commentId, postId: $postId) {\n        id\n      replyToId\n      postId\n      username\n      avatarUrl\n      userId\n      userbikes\n      createdAt\n      body\n      replies {\n        id\n        replyToId\n        username\n        avatarUrl\n        userId\n        userbikes\n        body\n        likes {\n          username\n          id\n          avatarUrl\n        }\n        likeCount\n        dislikes {\n          username\n          id\n          avatarUrl\n        }\n        dislikeCount\n      }\n      likes {\n        username\n        id\n        avatarUrl\n      }\n      likeCount\n      dislikes {\n        username\n        id\n        avatarUrl\n      }\n      dislikeCount\n    }\n}",
+						"variables": "{\n  \"commentId\": \"{{commentId}}\",\n  \"postId\": \"{{postId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dislikeComment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a5ec29c1-89ef-48eb-968a-5514ab8e4ce5",
+						"exec": [
+							"pm.test(\"user should dislike comment\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.dislikeComment[0].id).eq(pm.environment.get(\"commentId\"))\r",
+							"});\r",
+							"\r",
+							"pm.test(\"like count should decrease\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.dislikeComment[0].likeCount).eq(0)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation dislikeComment ($commentId: ID, $postId: ID) {\n    dislikeComment (commentId: $commentId, postId: $postId) {\n        id\n      replyToId\n      postId\n      username\n      avatarUrl\n      userId\n      userbikes\n      createdAt\n      body\n      replies {\n        id\n        replyToId\n        username\n        avatarUrl\n        userId\n        userbikes\n        body\n        likes {\n          username\n          id\n          avatarUrl\n        }\n        likeCount\n        dislikes {\n          username\n          id\n          avatarUrl\n        }\n        dislikeCount\n      }\n      likes {\n        username\n        id\n        avatarUrl\n      }\n      likeCount\n      dislikes {\n        username\n        id\n        avatarUrl\n      }\n      dislikeCount\n    }\n}",
+						"variables": "{\n  \"commentId\": \"{{commentId}}\",\n  \"postId\": \"{{postId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteComment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19130b74-8e3e-4a7c-b99e-b014d08f3d3e",
+						"exec": [
+							"pm.test(\"comment should delete\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.deleteComment).not.eq(undefined)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": " mutation deleteComment($commentId: ID!, $replyToId: ID) {\n    deleteComment(commentId: $commentId, replyToId: $replyToId) {\n      comment {\n        id\n        replyToId\n        postId\n        avatarUrl\n        userbikes\n        username\n        userId\n        createdAt\n        body\n        replies {\n          id\n          replyToId\n          username\n          avatarUrl\n          userId\n          userbikes\n          body\n          likes {\n            username\n            id\n            avatarUrl\n          }\n          likeCount\n          dislikes {\n            username\n            id\n            avatarUrl\n          }\n          dislikeCount\n        }\n      }\n      post {\n        id\n        body\n        title\n        createdAt\n        username\n        avatarUrl\n        userId\n        userbikes\n        likeCount\n        pictureUrls\n        userbikes\n        postType\n        location\n        when\n        days\n        offRoadPercentage\n        gpxFiles\n        bikes {\n          bikeId\n          bikename\n          thumbUrl\n        }\n        likes {\n          username\n        }\n        commentCount\n        postag\n        savedtag\n        saveCount\n      }\n    }\n  }",
+						"variables": "{\n  \"commentId\": \"{{commentId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "savePost",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "403842d0-3c6a-4189-b3a6-163f20e2d5b3",
+						"exec": [
+							"pm.test(\"user can save their own post\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.savePost.id).eq(pm.environment.get(\"postId\"))\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation savePost ($postId: ID) {\n    savePost (postId: $postId) {\n        id\n      body\n      createdAt\n      username\n      userId\n      userbikes\n      avatarUrl\n      likes {\n        id\n        createdAt\n        username\n      }\n      likeCount\n      commentCount\n      title\n      postType\n      isActive\n      postag\n      savedtag\n      saveCount\n    }\n}",
+						"variables": "{\n  \"postId\": \"{{postId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePost",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8777c173-7825-4496-8a7f-4769102da8d2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "df80e527-bcab-424a-8da5-5c5c50ccc943",
+						"exec": [
+							"pm.test(\"user can delete their own post\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.deletePost).eq(\"Post deleted successfully\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation deletePost ($postId: ID!) {\n    deletePost (postId: $postId)\n}",
+						"variables": "{\n  \"postId\": \"{{postId}}\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchPosts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query searchPosts ($cursor: String, $fieldmap: [FieldMap], $limit: String) {\n    searchPosts (cursor: $cursor, fieldmap: $fieldmap, limit: $limit) {\n        posts {\n            id\n            body\n            createdAt\n            username\n            userId\n            userbikes\n            avatarUrl\n            comments {\n                id\n                postId\n                replyToId\n                createdAt\n                username\n                userId\n                userbikes\n                avatarUrl\n                body\n                replies {\n                    id\n                    postId\n                    replyToId\n                    createdAt\n                    username\n                    userId\n                    userbikes\n                    avatarUrl\n                    body\n                    replies {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    likes {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        gender\n                        status\n                    }\n                    likeCount\n                    dislikes {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    dislikeCount\n                }\n                likes {\n                    id\n                    name\n                    username\n                    email\n                    avatarUrl\n                    token\n                    usertag\n                    admin\n                    ownBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    followBikes {\n                        id\n                        bikeId\n                        bikename\n                        description\n                        storyUrl\n                        isActive\n                        pictureUrls\n                        brand\n                        category\n                        thumbUrl\n                        prodStartYear\n                        prodEndYear\n                        createdAt\n                    }\n                    location\n                    createdAt\n                    bikes\n                    followers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        gender\n                        status\n                    }\n                    followersCount\n                    followUsers {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        gender\n                        status\n                    }\n                    following {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        gender\n                        status\n                    }\n                    gender\n                    status\n                }\n                likeCount\n                dislikes {\n                    id\n                    postId\n                    replyToId\n                    createdAt\n                    username\n                    userId\n                    userbikes\n                    avatarUrl\n                    body\n                    replies {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    likes {\n                        id\n                        name\n                        username\n                        email\n                        avatarUrl\n                        token\n                        usertag\n                        admin\n                        location\n                        createdAt\n                        bikes\n                        followersCount\n                        gender\n                        status\n                    }\n                    likeCount\n                    dislikes {\n                        id\n                        postId\n                        replyToId\n                        createdAt\n                        username\n                        userId\n                        userbikes\n                        avatarUrl\n                        body\n                        likeCount\n                        dislikeCount\n                    }\n                    dislikeCount\n                }\n                dislikeCount\n            }\n            likes {\n                id\n                createdAt\n                username\n            }\n            likeCount\n            commentCount\n            title\n            postType\n            isActive\n            postag\n            bikes {\n                id\n                bikeId\n                bikename\n                description\n                storyUrl\n                isActive\n                pictureUrls\n                brand\n                category\n                thumbUrl\n                prodStartYear\n                prodEndYear\n                createdAt\n            }\n            pictureUrls\n            location\n            when\n            days\n            offRoadPercentage\n            gpxFiles\n            savedtag\n            saveCount\n        }\n        cursor\n    }\n}",
+						"variables": "{\n  \"cursor\": \"\",\n  \"fieldmap\": {\n    \"field\": \"\",\n    \"pattern\": \"\",\n    \"gate\": \"\"\n  },\n  \"limit\": \"\"\n}"
+					},
+					"options": {
+						"graphql": {}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createBikePost",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fcbb7a5f-7a22-45c1-bd5d-ed901bbf14c9",
+						"exec": [
+							"pm.test(\"should create post successfully\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.id).not.eq(undefined)",
+							"    pm.environment.set(\"postId\", jsonData.data.createCommonPost.id)",
+							"});",
+							"",
+							"pm.test('should create post by same user', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.userId).eq(pm.environment.get(\"userId\"))",
+							"});",
+							"",
+							"pm.test('post must has type eq BikePost', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.postType).eq(\"BikePost\")",
+							"});",
+							"",
+							"pm.test('post must has bike', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.bikes.length).not.eq(0)",
+							"});",
+							"",
+							"pm.test('post must has title', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.title).not.eq(\"\")",
+							"});",
+							"pm.test('post must has bikes photo or not', function() {",
+							"    var jsonData = pm.response.json();",
+							"    var uploadedPics =(JSON.parse(pm.request.body.graphql.variables).pictureUrls).length",
+							"    ;",
+							"    pm.expect(jsonData.data.createCommonPost.pictureUrls.length).eq(uploadedPics)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createCommonPost(\n    $postId: ID\n    $postType: String!\n    $title: String!\n    $previewBody: String!\n    $previewMedia: String\n    $bikes: [BikesInPost]\n    $body: String!\n    $avatarUrl: String!\n    $username: String!\n    $name: String!\n    $userId: String!\n    $userbikes: String!\n    $pictureUrls: [String]\n    $embedPicture: String!\n    $location: [String!]\n    $when: String\n    $days: Int\n    $offRoadPercentage: Int\n    $gpxFiles: [String!]\n    $quesType: String\n    $additionalTag: String\n  ) {\n    createCommonPost(\n      postId: $postId\n      postType: $postType\n      title: $title\n      bikes: $bikes\n      previewBody: $previewBody,\n      previewMedia: $previewMedia,\n      body: $body\n      avatarUrl: $avatarUrl\n      username: $username\n      name: $name\n      userId: $userId\n      userbikes: $userbikes\n      pictureUrls: $pictureUrls\n      embedPicture: $embedPicture\n      location: $location\n      when: $when\n      days: $days\n      offRoadPercentage: $offRoadPercentage\n      gpxFiles: $gpxFiles\n      quesType: $quesType\n      additionalTag: $additionalTag\n    ) {\n      id\n      body\n      title\n      createdAt\n      username\n      name\n      avatarUrl\n      userId\n      userbikes\n      likeCount\n      likes {\n        username\n      }\n      commentCount\n      postag\n      postType\n      pictureUrls\n      bikes {\n        bikeId\n        bikename\n        thumbUrl\n      }\n      location\n      when\n      days\n      offRoadPercentage\n      gpxFiles\n    }\n  }",
+						"variables": "{\n  \"title\": \"{{$randomCompanyName}}\",\n  \"bikes\": {\n    \"bikeId\": \"5f37eeb86b86c04c2865b108\",\n      \"bikename\": \"AJP GALP 50 Enduro - 2005\",\n      \"thumbUrl\": \"https://motomob-test.s3.eu-west-2.amazonaws.com/bikes/18tmn-ajp-galp-50-enduro-2005-1.jpeg\",\n      \"prodStartYear\": \"2005\"\n  },\n  \"body\": \" {{$randomLoremParagraph}}\",\n  \"previewBody\": \"{{$randomLoremParagraph}}\",\n  \"previewMedia\":\"<img src=https://motomob-test.s3.eu-west-2.amazonaws.com/posts/1603691934300.jpeg />\",\n  \"pictureUrls\": [\n    \"https://motomob-test.s3.eu-west-2.amazonaws.com/posts/8rzbm-c3s6z-img-6.jpg\"\n  ],\n  \"location\": [],\n  \"when\": \"\",\n  \"days\": 0,\n  \"offRoadPercentage\": 0,\n  \"gpxFiles\": [],\n  \"username\": \"{{username}}\",\n  \"userId\": \"{{userId}}\",\n  \"userbikes\": \"AJP GALP 50 Enduro - 2005\",\n  \"avatarUrl\": \"{{avatarUrl}}\",\n  \"postType\":\"BikePost\",\n  \"name\":\"{{name}}\",\n  \"embedPicture\":\"https://motomob-test.s3.eu-west-2.amazonaws.com/posts/1603691934300.jpeg\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createTripPost",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16646aeb-6284-41f0-b33a-fea61a766232",
+						"exec": [
+							"pm.test(\"should create post successfully\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.id).not.eq(undefined)",
+							"    pm.environment.set(\"postId\", jsonData.data.createCommonPost.id)",
+							"});",
+							"",
+							"pm.test('should create post by same user', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.userId).eq(pm.environment.get(\"userId\"))",
+							"});",
+							"",
+							"pm.test('post must has type eq BikePost', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.postType).eq(\"TripPost\")",
+							"});",
+							"",
+							"pm.test('post must has bike', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.bikes.length).not.eq(0)",
+							"});",
+							"",
+							"pm.test('post must has location', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.location.length).not.eq(0)",
+							"});",
+							"",
+							"pm.test('post must has title', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.title).not.eq(\"\")",
+							"});",
+							"",
+							"pm.test('post must has when', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.when).not.eq(\"\")",
+							"});",
+							"",
+							"pm.test('post must has days', function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.createCommonPost.days).not.eq(0)",
+							"});",
+							"",
+							"pm.test('post must has gpx or not', function() {",
+							"    var jsonData = pm.response.json();",
+							"    var uploadedGPX =(JSON.parse(pm.request.body.graphql.variables).gpxFiles).length",
+							"    ;",
+							"    pm.expect(jsonData.data.createCommonPost.gpxFiles.length).eq(uploadedGPX)",
+							"});",
+							"",
+							"pm.test('post must has tirp photo or not', function() {",
+							"    var jsonData = pm.response.json();",
+							"    var uploadedPics =(JSON.parse(pm.request.body.graphql.variables).pictureUrls).length",
+							"    ;",
+							"    pm.expect(jsonData.data.createCommonPost.pictureUrls.length).eq(uploadedPics)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation createCommonPost(\n    $postId: ID\n    $postType: String!\n    $title: String!\n    $previewBody: String!\n    $previewMedia: String\n    $bikes: [BikesInPost]\n    $body: String!\n    $avatarUrl: String!\n    $username: String!\n    $name: String!\n    $userId: String!\n    $userbikes: String!\n    $pictureUrls: [String]\n    $embedPicture: String!\n    $location: [String!]\n    $when: String\n    $days: Int\n    $offRoadPercentage: Int\n    $gpxFiles: [String!]\n    $quesType: String\n    $additionalTag: String\n  ) {\n    createCommonPost(\n      postId: $postId\n      postType: $postType\n      title: $title\n      bikes: $bikes\n      previewBody: $previewBody,\n      previewMedia: $previewMedia,\n      body: $body\n      avatarUrl: $avatarUrl\n      username: $username\n      name: $name\n      userId: $userId\n      userbikes: $userbikes\n      pictureUrls: $pictureUrls\n      embedPicture: $embedPicture\n      location: $location\n      when: $when\n      days: $days\n      offRoadPercentage: $offRoadPercentage\n      gpxFiles: $gpxFiles\n      quesType: $quesType\n      additionalTag: $additionalTag\n    ) {\n      id\n      body\n      title\n      createdAt\n      username\n      name\n      avatarUrl\n      userId\n      userbikes\n      likeCount\n      likes {\n        username\n      }\n      commentCount\n      postag\n      postType\n      pictureUrls\n      bikes {\n        bikeId\n        bikename\n        thumbUrl\n      }\n      location\n      when\n      days\n      offRoadPercentage\n      gpxFiles\n    }\n  }",
+						"variables": "{\n  \"title\": \"{{$randomCompanyName}}\",\n  \"bikes\": {\n    \"bikeId\": \"5f37eeb86b86c04c2865b108\",\n      \"bikename\": \"AJP GALP 50 Enduro - 2005\",\n      \"thumbUrl\": \"https://motomob-test.s3.eu-west-2.amazonaws.com/bikes/18tmn-ajp-galp-50-enduro-2005-1.jpeg\",\n      \"prodStartYear\": \"2005\"\n  },\n  \"body\": \"<p>asd asd sda das trip post <img src='https://motomob-test.s3.eu-west-2.amazonaws.com/posts/1606745581039.jpeg'></p> {{$randomLoremParagraph}}\",\n  \"previewBody\": \"asd asd sda das trip post  {{$randomLoremParagraph}}\",\n  \"previewMedia\":\"<img src=https://motomob-test.s3.eu-west-2.amazonaws.com/posts/1606745581039.jpeg />\",\n  \"pictureUrls\": [\n    \"https://motomob-test.s3.eu-west-2.amazonaws.com/posts/y5byq-cjmeister-com--cj05958.jpg\"\n  ],\n  \"location\": [\"{{$randomLocale}}\"],\n  \"when\": \"2020-10-10\",\n  \"days\": 12,\n  \"offRoadPercentage\": 10,\n  \"gpxFiles\": [\"https://motomob-test.s3.eu-west-2.amazonaws.com/posts/33si4-9bceg-run.gpx\"],\n  \"username\": \"{{username}}\",\n  \"userId\": \"{{userId}}\",\n  \"userbikes\": \"AJP GALP 50 Enduro - 2005\",\n  \"avatarUrl\": \"{{avatarUrl}}\",\n  \"postType\":\"TripPost\",\n  \"name\":\"{{name}}\",\n  \"embedPicture\":\"https://motomob-test.s3.eu-west-2.amazonaws.com/posts/1606745581039.jpeg\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createComment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6157a918-77c4-4fea-a9d1-711502efbf8b",
+						"exec": [
+							"pm.test(\"Should get comment and post data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"commentId\", jsonData.data.createComment.comment.id)",
+							"    var userId=JSON.parse(pm.request.body.graphql.variables).userId;",
+							"    var postId=JSON.parse(pm.request.body.graphql.variables).postId;",
+							"    ",
+							"    pm.expect(jsonData.data.createComment.comment.userId).eq(userId)    ",
+							"    pm.expect(jsonData.data.createComment.post.id).eq(postId)    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation($postId: ID!, $body: String!, $replyToId: String, $avatarUrl: String!, $userbikes: String!, $username: String!, $userId: String!, $name: String!) {\n    createComment(\n      postId: $postId\n      body: $body\n      replyToId: $replyToId\n      avatarUrl: $avatarUrl\n      userbikes: $userbikes\n      username: $username\n      userId: $userId\n      name: $name\n    ) {\n      comment {\n        id\n        replyToId\n        postId\n        avatarUrl\n        userbikes\n        username\n        name\n        userId\n        createdAt\n        body\n      }\n\n      post {\n        id\n        body\n        title\n        createdAt\n        username\n        avatarUrl\n        userId\n        userbikes\n        likeCount\n        pictureUrls\n        userbikes\n        postType\n        location\n        when\n        days\n        offRoadPercentage\n        gpxFiles\n        bikes {\n          bikeId\n          bikename\n          thumbUrl\n        }\n        likes {\n          username\n        }\n        commentCount\n        postag\n        savedtag\n        saveCount\n      }\n    }\n  }",
+						"variables": "{\n \n    \"postId\": \"5f61e5155ba3291a24214b1c\",\n    \"body\": \"Hi it it good bike\",\n    \"replyToId\":\"\",\n    \"avatarUrl\": \"https://motomob-stage.s3.eu-west-2.amazonaws.com/users/5f55e78eca03ca00178a4771\",\n    \"userbikes\": \"AJP PR3 Supermoto 240 - 2020, Indian 101 Scout - 1931\",\n    \"username\": \"{{username}}\",\n    \"userId\": \"{{userId}}\",\n    \"name\":\"{{name}}\"\n   \n  \n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateComment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b2b540f-d5fd-466b-96fb-e1a94e87937f",
+						"exec": [
+							"pm.test(\"Should get commets list of particular post\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    var postId=JSON.parse(pm.request.body.graphql.variables).postId;",
+							"    var commentId=JSON.parse(pm.request.body.graphql.variables).commentId;",
+							"   ",
+							"    pm.expect(jsonData.data.updateComment.findIndex(x=>x.postId==postId)).not.eq(-1) ",
+							"    pm.expect(jsonData.data.updateComment.findIndex(x=>x.id==commentId)).not.eq(-1) ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation($postId: ID!, $body: String!, $commentId: String!) {\n    updateComment(postId: $postId, body: $body, commentId: $commentId) {\n      id\n      replyToId\n      postId\n      avatarUrl\n      userbikes\n      username\n      userId\n      createdAt\n      body \n      replies {\n        id\n        replyToId\n        username\n        avatarUrl\n        userId\n        userbikes\n        body\n        likes {\n          username\n          id\n          avatarUrl\n        }\n        likeCount\n        dislikes {\n          username\n          id\n          avatarUrl\n        }\n        dislikeCount\n      }\n    }\n  }",
+						"variables": "{\n    \"postId\":\"5f8d4e9ffdf4f06b15180082\",\n    \"body\":\"test\",\n    \"commentId\":\"5f8d556e0d438e5311b13a68\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteComment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d3b0e10-a72d-4fca-b360-15afd968a2fd",
+						"exec": [
+							"pm.test(\"Should delete comment\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var commentId=JSON.parse(pm.request.body.graphql.variables).commentId;",
+							"    console.log('commentId',commentId)",
+							"    var replyToId=JSON.parse(pm.request.body.graphql.variables).replyToId;",
+							"    console.log('replyToId',replyToId)",
+							"    if(replyToId){",
+							"        console.log('if')",
+							"        pm.expect(jsonData.data.deleteComment.comment.findIndex(x=>x.id!==replyToId)).eq(0)",
+							"    }else{",
+							"        pm.expect(jsonData.data.deleteComment.comment.findIndex(x=>x.id!==commentId)).eq(0)  ",
+							"    }",
+							"       ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{verifyToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation deleteComment($commentId: ID!, $replyToId: ID) {\n    deleteComment(commentId: $commentId, replyToId: $replyToId){\n      comment {\n        id\n        replyToId\n        postId\n        avatarUrl\n        userbikes\n        username\n        userId\n        createdAt\n        body\n        replies {\n          id\n          replyToId\n          username\n          avatarUrl\n          userId\n          userbikes\n          body\n          likes {\n            username\n            id\n            avatarUrl\n          }\n          likeCount\n          dislikes {\n            username\n            id\n            avatarUrl\n          }\n          dislikeCount\n        }\n      }\n      post {\n        id\n        body\n        title\n        createdAt\n        username\n        avatarUrl\n        userId\n        userbikes\n        likeCount\n        pictureUrls\n        userbikes\n        postType\n        location\n        when\n        days\n        offRoadPercentage\n        gpxFiles\n        bikes {\n          bikeId\n          bikename\n          thumbUrl\n        }\n        likes {\n          username\n        }\n        commentCount\n        postag\n        savedtag\n        saveCount\n      }\n    }\n  }",
+						"variables": "{\n    \"commentId\":\"{{commentId}}\",\n    \"replyToId\":\"\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

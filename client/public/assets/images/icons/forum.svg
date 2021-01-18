@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Forum</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Profile" transform="translate(-1066.000000, -266.000000)" fill="#e83f3f" fill-rule="nonzero">
+            <g id="Right-Menu" transform="translate(1064.000000, 112.000000)">
+                <path d="M21,158 L19,158 L19,167 L6,167 L6,169 C6,169.55 6.45,170 7,170 L18,170 L22,174 L22,159 C22,158.45 21.55,158 21,158 Z M17,164 L17,155 C17,154.45 16.55,154 16,154 L3,154 C2.45,154 2,154.45 2,155 L2,169 L6,165 L16,165 C16.55,165 17,164.55 17,164 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

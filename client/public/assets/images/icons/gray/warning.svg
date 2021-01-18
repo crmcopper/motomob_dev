@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20" height="20" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Warinig</title>
+    <g id="Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Bike-profile" transform="translate(-489.000000, -921.000000)" fill="#BABECB" fill-rule="nonzero">
+            <g id="Post-Copy-3" transform="translate(400.000000, 649.000000)">
+                <path d="M99,272 C93.5,272 89,276.5 89,282 C89,287.5 93.5,292 99,292 C104.5,292 109,287.5 109,282 C109,276.5 104.5,272 99,272 Z M91,282 C91,277.6 94.6,274 99,274 C100.8,274 102.5,274.6 103.9,275.7 L92.7,286.9 C91.6,285.5 91,283.8 91,282 Z M99,290 C97.2,290 95.5,289.4 94.1,288.3 L105.3,277.1 C106.4,278.5 107,280.2 107,282 C107,286.4 103.4,290 99,290 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

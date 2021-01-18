@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="80px" viewBox="0 0 48 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>badge</title>
+    <g id="Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Photo-Contest-Prize-&amp;-Criteria" transform="translate(-382.000000, -784.000000)" fill="#E83F3F">
+            <g id="badge" transform="translate(382.000000, 784.000000)">
+                <path d="M39,47 L39,80 L24,64 L9,80 L9,47 C13.3420814,50.2456758 18.3785698,51.9262547 23.4397654,52.0417368 C28.8744059,52.1657399 34.3375342,50.4851609 39,47 Z M24,48 C10.745166,48 0,37.254834 0,24 C0,10.745166 10.745166,0 24,0 C37.254834,0 48,10.745166 48,24 C48,37.254834 37.254834,48 24,48 Z M24,44 C35.045695,44 44,35.045695 44,24 C44,12.954305 35.045695,4 24,4 C12.954305,4 4,12.954305 4,24 C4,35.045695 12.954305,44 24,44 Z" id="Shape" fill-rule="nonzero"></path>
+                <text id="1" font-family="Futura-Bold, Futura" font-size="20" font-weight="bold">
+                    <tspan x="17.2" y="35">1</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

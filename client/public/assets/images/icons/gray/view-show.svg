@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20" height="13" viewBox="0 0 20 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>view-show</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.729412 0 0 0 0 0.745098 0 0 0 0 0.796078 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="view-show" transform="translate(-263.000000, -572.000000)" filter="url(#filter-1)">
+            <g transform="translate(263.000000, 572.000000)">
+                <path d="M0.2,6 C2.07830395,2.31557554 5.86442152,-0.00400160128 10,-0.00400160128 C14.1355785,-0.00400160128 17.921696,2.31557554 19.8,6 C17.921696,9.68442446 14.1355785,12.0040016 10,12.0040016 C5.86442152,12.0040016 2.07830395,9.68442446 0.2,6 L0.2,6 Z M10,10 C12.209139,10 14,8.209139 14,6 C14,3.790861 12.209139,2 10,2 C7.790861,2 6,3.790861 6,6 C6,8.209139 7.790861,10 10,10 Z M10,8 C8.8954305,8 8,7.1045695 8,6 C8,4.8954305 8.8954305,4 10,4 C11.1045695,4 12,4.8954305 12,6 C12,7.1045695 11.1045695,8 10,8 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

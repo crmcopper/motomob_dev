@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Marketplace</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Profile" transform="translate(-1067.000000, -319.000000)" fill="#BABECB" fill-rule="nonzero">
+            <g id="Right-Menu" transform="translate(1064.000000, 112.000000)">
+                <path d="M20,207 L4,207 L4,209 L20,209 L20,207 Z M21,217 L21,215 L20,210 L4,210 L3,215 L3,217 L4,217 L4,223 L14,223 L14,217 L18,217 L18,223 L20,223 L20,217 L21,217 Z M12,221 L6,221 L6,217 L12,217 L12,221 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

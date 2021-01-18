@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "motomob-me",
+  "private_key_id": "1e941123d69b6570bfdc890872ff993f7a01965f",
+  "API_KEY": "AIzaSyC92bEeohqzAry7HOtdM47AAufQCEM7H4o",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCKlcQLriaWuqeA\nmpBzBirPemwx46QJzS4WJy9AWDCziPCuEo9zHsp7sHQcSX5bPCa6cnishYpBOBw7\nz8GSlgrF5d0z/Zx1vibTcXTSi4OyQWlWsZB2g9phoxjHeorsSxIWd6WBoqCAhfcY\ny+OpzoiXZVNgFxETQs4b8jU5YGtsI25g78W1+f+KBEm2OnQ3sel0d+kpLlwRPCQv\nv429gJfqj4C6MnqrAUTPBsckCaPk/etKRdj+TVXTCluCoNkJRiyu54nz/KcQ16EM\namAQ6qG074c3coAISIYDCm1+Qu7/+JEuHNSyu1+w6Ja/WSA1GWzLXh0eH0nBirhv\nkx8/BmDZAgMBAAECggEAMIJT6TLAVypmz2FLBrg17AISNTRViwjDBQYaSA+WnIFm\nncfpZoZ0oe8V9YDUNeNMOx8ullT4G/QkDdufCkxy4OqhDz3Ksnwo4wJnvfsP0imL\nUck9o/5rRpnsZobCcguk/TBMQqBGRjaeU5Oq0Rl2Pmg9UvlABNnxg164uqjBcUxB\nvgNHFUBr/k7L5psY3Hnzq3Yj1GXHFj2+V/dQOFLHuZm7wONCFrIM6KM21Z6GSvqE\nthMHNttDVxxq87UKBxnVEmTEWs0b2zBlSReSXJzv27/REii9z3kOr0oIFUQO0Ba3\nJr1L184Aye6XkYRpBRaHIjUHI9iW8n9JsmUAdHs/8QKBgQDCOF2ZiaOpU7xKtrbn\nrINmCZ3uAVRJc4R/PXnbbAVbedYPyX8LnASv5rw03QYkmao/aq/6dm6CN9Tu07RD\nXaJ2oVe6ulkgzqo4izyHkupJ2dZpsFShT7G6gmXcFLIPk7njwnV/6WidlZwjKCHZ\nN8wsiaFbGYvzhNFgEWN/GfvKOwKBgQC2qvKfmgTQRFsTmvSIwRK/LBHrrrsCoqm1\n7zfmukIksEXbmKQLicjlIwiljUJN3O10EawhHCF91HAC7x0tIFNFbaWyNxP7p1Mf\nSAhbDowwejE196yIs2x0L7SwfQbOUyQgTZAAUZVDM3RuO55c+rfBV5u16UKOImg8\nRY9ulGq7+wKBgGfsuUj6+XQVtl9UPbLiAL2Mz9EXLP7QrUlYn+fleUhlfUGdVDnm\nFiv5jyPKUQssnoiokdm3nZJYRbw10/NoGxLXapYkOKTxcOwotQ7mci9qPOz4yZA3\nkKZ4OAD3of/r0EArQaxcPPp1n8LAKryMutfqHUkd9mEr5M0/ALp2MOEZAoGBALMl\nCheOhGQAddXPZTztJUaJoPWkAlH+VzRPbGKCjrXOjmRj2ZZbRcO6zRMXa0xTfCkV\n39sE7K+r9UJbYSDNj/0KILOcIqPuIK4QBenPZZtxauvDf9j9JkL4OlvP8inNDiQE\nDVLSr/Ec+HXXUGNdm3MpSVNpdVVR1yotChLnyZmbAoGADMpDKWgEc+A/qC+0Cf2R\nzjiAluJhtwjZBkg07F3i/UDuam2yI2B70C5Gj3t9rZomnzG3x5JYkeGjxSLHqdhw\nrcrRDdv7jAw9NywhUTLueb9KCchDdvod4yg4bcQhdVHUg++U+2LusVFivPhfj6vb\nmOBhs5zZNEUbOdse+S6/GMc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "motomob-service@motomob-me.iam.gserviceaccount.com",
+  "client_id": "115689175701831361267",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/motomob-service%40motomob-me.iam.gserviceaccount.com"
+}

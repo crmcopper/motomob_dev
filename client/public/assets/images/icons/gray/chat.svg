@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18" height="16" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Chat</title>
+    <g id="assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Trip-Thumbnail" transform="translate(-147.000000, -76.000000)" fill="#BABECB" fill-rule="nonzero">
+            <g id="Path">
+                <path d="M156,76 C151.05,76 147,79.2727273 147,83.2727273 C147,87.2727273 151.05,90.5454545 156,90.5454545 C156.75,90.5454545 157.5,90.4727273 158.25,90.3272727 L162.45,91.9272727 C162.525,91.9272727 162.6,92 162.75,92 C162.9,92 163.05,91.9272727 163.2,91.8545455 C163.425,91.7090909 163.5,91.4181818 163.5,91.2 L163.125,87.7818182 C164.325,86.4727273 165,84.9454545 165,83.3454545 C165,79.2727273 160.95,76 156,76 Z"></path>
+            </g>
+        </g>
+    </g>
+</svg>

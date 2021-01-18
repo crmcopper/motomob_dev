@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Shape</title>
+    <g id="Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Bike-profile" transform="translate(-560.000000, -812.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Post-Copy-3" transform="translate(400.000000, 649.000000)">
+                <path d="M180,163 C168.95,163 160,171.95 160,183 C160,194.05 168.95,203 180,203 C191.05,203 200,194.05 200,183 C200,171.95 191.05,163 180,163 Z M176,191 L176,175 C176,174.723858 176.223858,174.5 176.5,174.5 C176.608185,174.5 176.713452,174.535089 176.8,174.6 L187.466667,182.6 C187.687581,182.765685 187.732352,183.079086 187.566667,183.3 C187.53824,183.337903 187.504569,183.371573 187.466667,183.4 L176.8,191.4 C176.579086,191.565685 176.265685,191.520914 176.1,191.3 C176.035089,191.213452 176,191.108185 176,191 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

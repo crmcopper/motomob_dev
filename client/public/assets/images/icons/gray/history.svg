@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>History</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Profile" transform="translate(-204.000000, -395.000000)" fill="#BABECB" fill-rule="nonzero">
+            <g id="Left-Menu" transform="translate(190.000000, 112.000000)">
+                <path d="M26,283 C21.03,283 17,287.03 17,292 L14,292 L17.89,295.89 L17.96,296.03 L22,292 L19,292 C19,288.13 22.13,285 26,285 C29.87,285 33,288.13 33,292 C33,295.87 29.87,299 26,299 C24.07,299 22.32,298.21 21.06,296.94 L19.64,298.36 C21.27,299.99 23.51,301 26,301 C30.97,301 35,296.97 35,292 C35,287.03 30.97,283 26,283 Z M25,288 L25,293 L29.28,295.54 L30,294.33 L26.5,292.25 L26.5,288 L25,288 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

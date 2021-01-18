@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="4px" viewBox="0 0 16 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>More-horizontal</title>
+    <g id="Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="My-Bikes" transform="translate(-1013.000000, -739.000000)" fill="#e83f3f" fill-rule="nonzero">
+            <g id="Bitmap-Copy-7" transform="translate(725.000000, 413.000000)">
+                <path d="M296,324 C297.1,324 298,323.1 298,322 C298,320.9 297.1,320 296,320 C294.9,320 294,320.9 294,322 C294,323.1 294.9,324 296,324 Z M296,326 C294.9,326 294,326.9 294,328 C294,329.1 294.9,330 296,330 C297.1,330 298,329.1 298,328 C298,326.9 297.1,326 296,326 Z M296,332 C294.9,332 294,332.9 294,334 C294,335.1 294.9,336 296,336 C297.1,336 298,335.1 298,334 C298,332.9 297.1,332 296,332 Z" id="Shape" transform="translate(296.000000, 328.000000) rotate(90.000000) translate(-296.000000, -328.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

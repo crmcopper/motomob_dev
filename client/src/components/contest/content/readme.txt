@@ -1,0 +1,1 @@
+Content folder consists of files with static content that will be rendered as Prizes/Criteria page. The name of the file is equal to Id of the contest. There are separate files for every contest with unique content.

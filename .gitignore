@@ -1,0 +1,14 @@
+FILES
+node_modules
+.idea
+client/npm-shrinkwrap.json
+.DS_Store
+package-lock.json
+.env
+.env.*
+
+client/package-lock.json
+newman/*
+test/newman/*
+scripts/*
+*.log

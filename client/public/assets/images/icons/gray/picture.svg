@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18" height="18" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Picture</title>
+    <g id="Platform" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Share-Widget" transform="translate(-892.000000, -1105.000000)" fill="#BABECB" fill-rule="nonzero">
+            <g id="Creat-a-post" transform="translate(400.000000, 1078.000000)">
+                <path d="M510,43 L510,29 C510,27.9 509.1,27 508,27 L494,27 C492.9,27 492,27.9 492,29 L492,43 C492,44.1 492.9,45 494,45 L508,45 C509.1,45 510,44.1 510,43 Z M497.5,37.5 L500,40.51 L503.5,36 L508,42 L494,42 L497.5,37.5 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

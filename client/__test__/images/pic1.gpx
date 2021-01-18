@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<gpx
+  version="1.0"
+  creator="VB Net GPS:  vermeiren-willy@pandora.be"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.topografix.com/GPX/1/0"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+
+<bounds minlat="51.396017" minlon="4.498043" maxlat="51.430402" maxlon="4.556108"/>
+
+<wpt lat="51.39709" lon="4.501519">
+   <name>START</name>
+</wpt>
+
+<rte>
+  <name>Achterbroek naar De Maatjes   13 km RT</name>
+    <rtept lat="51.39709" lon="4.501519">
+      <name>1</name>
+      <cmt>1</cmt>
+    </rtept>
+    <rtept lat="51.398635" lon="4.502678">
+      <name>2</name>
+      <cmt>2</cmt>
+    </rtept>
+    <rtept lat="51.405072" lon="4.498043">
+      <name>3</name>
+      <cmt>3</cmt>
+    </rtept>
+    <rtept lat="51.417346" lon="4.515038">
+      <name>4</name>
+      <cmt>4</cmt>
+    </rtept>
+    <rtept lat="51.41932" lon="4.513879">
+      <name>5</name>
+      <cmt>5</cmt>
+    </rtept>
+    <rtept lat="51.421552" lon="4.523535">
+      <name>6</name>
+      <cmt>6</cmt>
+    </rtept>
+    <rtept lat="51.423011" lon="4.522848">
+      <name>7</name>
+      <cmt>7</cmt>
+    </rtept>
+    <rtept lat="51.423826" lon="4.5295">
+      <name>8</name>
+      <cmt>8</cmt>
+    </rtept>
+    <rtept lat="51.427002" lon="4.528513">
+      <name>9</name>
+      <cmt>9</cmt>
+    </rtept>
+    <rtept lat="51.430402" lon="4.552363">
+      <name>10</name>
+      <cmt>10</cmt>
+    </rtept>
+    <rtept lat="51.426229" lon="4.555399">
+      <name>11</name>
+      <cmt>11</cmt>
+    </rtept>
+    <rtept lat="51.426015" lon="4.554734">
+      <name>12</name>
+      <cmt>12</cmt>
+    </rtept>
+    <rtept lat="51.423569" lon="4.556108">
+      <name>13</name>
+      <cmt>13</cmt>
+    </rtept>
+    <rtept lat="51.41932" lon="4.546237">
+      <name>14</name>
+      <cmt>14</cmt>
+    </rtept>
+    <rtept lat="51.410952" lon="4.534092">
+      <name>15</name>
+      <cmt>15</cmt>
+    </rtept>
+    <rtept lat="51.406231" lon="4.543018">
+      <name>16</name>
+      <cmt>16</cmt>
+    </rtept>
+    <rtept lat="51.396695" lon="4.515966">
+      <name>17</name>
+      <cmt>17</cmt>
+    </rtept>
+    <rtept lat="51.396017" lon="4.515853">
+      <name>18</name>
+      <cmt>18</cmt>
+    </rtept>
+    <rtept lat="51.397133" lon="4.502635">
+      <name>19</name>
+      <cmt>19</cmt>
+    </rtept>
+</rte>
+</gpx>
