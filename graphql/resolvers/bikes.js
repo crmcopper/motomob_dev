@@ -1,6 +1,7 @@
 const { validateEditBike } = require("../../util/validators")
 const { UserInputError } = require("apollo-server")
 
+
 const Bike = require("../../models/Bike")
 const checkAuth = require("../../util/checkAuth")
 const Link = require("../../models/Link")
